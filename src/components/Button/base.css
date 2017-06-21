@@ -1,0 +1,185 @@
+@import './var.css';
+@import './colors.css';
+@import './status.css';
+
+.button {
+  @apply --button;
+
+  /* button[disabled] */
+  &[disabled] {
+    border: none;
+    background-image: none;
+    filter: alpha(opacity=40);
+    opacity: 0.40;
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+  }
+
+  /* button:focus */
+  &:focus {
+    outline: 0;
+    filter: alpha(opacity=90);
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+  }
+
+  /* button:hover */
+  &:hover {
+    filter: alpha(opacity=90);
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+  }
+
+  /* button:active */
+  &:active {
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    border-color: #000;
+  }
+}
+
+  /* Modifier */
+
+  /* button--active */
+.button--active {
+  box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+  border-color: #000;
+}
+
+/* button--disabled */
+.button--disabled {
+  border: none;
+  background-image: none;
+  filter: alpha(opacity=40);
+  opacity: 0.40;
+  cursor: not-allowed;
+  box-shadow: none;
+  pointer-events: none;
+
+  &:hover, &:focus, &:active {
+    border: none;
+    background-image: none;
+    filter: alpha(opacity=40);
+    opacity: 0.40;
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+  }
+}
+
+/* button--hidden */
+.button--hidden {
+  display: none;
+}
+
+/* button--hover */
+.button--hover {
+  filter: alpha(opacity=90);
+  background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+
+.button--xsmall {
+  font-size: 70%;
+}
+
+.button--small {
+  font-size: 85%;
+}
+
+.button--large {
+  font-size: 110%;
+}
+
+.button--xlarge {
+  font-size: 125%;
+}
+
+/* button--round */
+.button--round {
+  @apply --button-round;
+}
+
+/* button--primary */
+.button--primary {
+  @apply --button-primary;
+}
+
+/* button--success */
+.button--success {
+  @apply --button-success;
+}
+
+/* button--error */
+.button--error {
+  @apply --button-error;
+}
+
+/* button--warning */
+.button--warning {
+  @apply --button-warning;
+}
+
+/* button--blue */
+.button--blue {
+  @apply --button-blue;
+}
+
+/* button--yellow */
+.button--yellow {
+  @apply --button-yellow;
+}
+
+/* button--black */
+.button--black {
+  @apply --button-black;
+}
+
+/* button--green */
+.button--green {
+  @apply --button-green;
+}
+
+/* button--red */
+.button--red {
+  @apply --button-red;
+}
+
+/* button--purple */
+.button--purple {
+  @apply --button-purple;
+}
+
+/* button--orange */
+.button--orange {
+  @apply --button-orange;
+}
+
+/* button--indigo */
+.button--indigo {
+  @apply --button-indigo;
+}
+
+
+/* button-group */
+.button-group {
+
+  @apply --button-group;
+
+  & .button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+
+    @apply --button-group-item;
+
+    &:first-child {
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      border-right: none;
+    }
+  }
+}

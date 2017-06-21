@@ -1,0 +1,109 @@
+@import './var.css';
+.menu {
+  @apply --menu;
+}
+
+
+/* menu__list */
+
+.menu__list {
+  @apply --list;
+}
+
+
+/* menu__dropdown-list */
+
+.menu__dropdown-list {
+  @apply --dropdown-list;
+}
+
+
+/* menu__item */
+
+.menu__item {
+  @apply --item;
+}
+
+.menu__item--active {
+  @nest & .menu__link,
+  & .menu__link:visited {
+    background-color: #eee;
+    color: #000;
+  }
+}
+
+.menu__item--disabled {
+  @apply --disabled;
+
+  @nest & .menu__link:hover {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+}
+
+
+/* menu__link */
+
+.menu__link {
+  @apply --link;
+  @nest &:hover,
+  &:focus {
+    background-color: #eee
+  }
+}
+
+
+/* menu__heading */
+
+.menu__heading {
+  @apply --heading;
+}
+
+
+/* menu__separator */
+
+.menu__separator {
+  @apply --separator;
+}
+
+
+/* Modifier */
+
+
+/* menu--fixed */
+.menu--fixed {
+  @apply --fixed;
+}
+
+
+/* menu--scrollable */
+.menu--scrollable {
+  @apply --scrollable;
+  @nest & .menu__list {
+    display: block;
+  }
+}
+
+.submenu {
+  /* .submenu > .menu__link:after */
+  @nest &>.menu__link:after {
+    padding-left: 0.8rem;
+    content: "\25B8";
+    font-size: small;
+  }
+}
+
+.submenu--active {
+  background-color: #eee;
+  @nest &>.menu__dropdown-list {
+    display: block;
+    position: absolute;
+  }
+}
+
+.submenu--allow-hover {
+  @nest &:hover>.menu__dropdown-list {
+    display: block;
+    position: absolute;
+  }
+}

@@ -1,0 +1,75 @@
+/* menu-horizontal */
+.menu-horizontal {
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.menu-horizontal {
+
+  & .menu__list {
+    display: inline-block;
+  }
+
+  & .menu__dropdown-list {
+    left: 0;
+    top: auto;
+    width: inherit;
+
+    & .menu__separator {
+      display: block;
+      width: auto;
+    }
+
+    & .menu__item {
+      display: block;
+    }
+  }
+
+  & .menu__heading {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+  }
+
+  & .menu__item {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+  }
+
+
+  & .submenu {
+
+    & > .menu__link:after {
+      content: "\25BE";
+    }
+  }
+
+  & .menu__separator {
+    width: 1px;
+    height: 2.08rem;
+    margin: 0 .48rem;
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+  }
+
+  &.menu--scrollable {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    /* a little extra padding for this style to allow for scrollbars */
+    padding: .8rem 0;
+
+    & .menu__list {
+      display: inline-block;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

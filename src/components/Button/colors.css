@@ -1,0 +1,42 @@
+:root {
+
+  --button-blue: {
+    background: #e1f2fa;
+    color: #5992aa;
+  }
+
+  --button-yellow: {
+    background: #fcebbd;
+    color: #af9540;
+  }
+
+  --button-black: {
+    background: #333;
+    color: #fff;
+  }
+
+  --button-green: {
+    background: #d3eda3;
+    color: #72962e;
+  }
+
+  --button-red: {
+    background: #f5ab9e;
+    color: #8c3a2b;
+  }
+
+  --button-purple: {
+    background: #ddaeff;
+    color: #8156a7;
+  }
+
+  --button-orange: {
+    background: #f57b00;
+    color: #ffca95;
+  }
+
+  --button-indigo: {
+    background: #008ed4;
+    color: #fff;
+  }
+}

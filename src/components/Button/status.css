@@ -1,0 +1,31 @@
+/*
+ * @CreateTime: Apr 2, 2017 10:44 PM
+ * @Author: eteplus
+ * @Contact: eterplus@gmail.com
+ * @Last Modified By: eteplus
+ * @Last Modified Time: Apr 2, 2017 10:49 PM
+ * @Description: status
+ */
+
+:root {
+
+  --button-primary: {
+    background-color: rgb(0, 120, 231);
+    color: #fff;
+  }
+
+  --button-success: {
+    background-color: rgb(28, 184, 65);
+    color: #fff;
+  }
+
+  --button-error: {
+    background-color: rgb(202, 60, 60);
+    color: #fff;
+  }
+
+  --button-warning: {
+    background-color: rgb(223, 117, 20);
+    color: #fff;
+  }
+}

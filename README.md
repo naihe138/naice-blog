@@ -1,6 +1,6 @@
-# Koa Vue SSR Template
+# Koa Vue SSR Blog
 
->  This template built with Vue 2.0, vue-router & vuex  with server-side rendering by koa.
+>  This Blog built with Vue 2.0, vue-router & vuex  with server-side rendering by koa.
 
 ## Build Setup
 Requires Node.js 7+

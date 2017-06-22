@@ -6,22 +6,16 @@ import store from './store'
 import router from './router'
 import titleMixin from './utils/title'
 
-// mixin for handling title
+// mixin 处理标题
 Vue.mixin(titleMixin)
 
-// sync the router with the vuex store.
+// 同步加载路router由和 store
 // this registers `store.state.route`
 sync(store, router)
 
-
-// create the app instance.
-// here we inject the router and store to all child components,
 const app = new Vue({
   router,
   store,
   render: h => h(App)
 })
-// making them available everywhere as `this.$router` and `this.$store`.
-
-// different depending on whether we are in a browser or on the server.
 export { app, router, store }

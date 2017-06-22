@@ -16,27 +16,25 @@ const microCache = LRU({
 })
 
 const titles = {
-  '/': 'Koa Vue SSR',
-  '/home': 'Koa Vue SSR | Home',
-  '/menu': 'Koa Vue SSR | Menu',
-  '/button': 'Koa Vue SSR | Button'
+  '/': 'naice',
+  '/home': 'naice'
 }
-const cacheUrls = ['/', '/home', '/menu', '/button']
+const cacheUrls = ['/', '/home']
 
 const isCacheable = ctx => cacheUrls.indexOf(ctx.url) >= 0 && useMicroCache
 
 const resolve = file => path.resolve(__dirname, file)
 
-// create koa instance
+// 创建 koa 实例
 const app = new Koa()
 
-// cache static
+// 静态资源缓存函数
 const serve = (filepath, cache) => require('koa-static')(resolve(filepath), {
   maxage: cache && isProd ? 60 * 60 * 24 * 30 : 0
 })
-
+// 渲染模板
 const template = fs.readFileSync(resolve('../src/index.template.html'), 'utf-8')
-
+// 穿件渲染
 function createRenderer(bundle, options) {
   return require('vue-server-renderer').createBundleRenderer(bundle, Object.assign(options, {
     template,

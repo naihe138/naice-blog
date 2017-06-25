@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomeView from '@/views/HomeView'
-import MenuView from '@/views/MenuView'
-import ButtonView from '@/views/ButtonView'
+import PostListView from '@/views/PostListView'
+import PostList from '@/views/PostList'
 // import Test from '@/views/test'
 Vue.use(Router)
 /* eslint-disable import/no-dynamic-require */
@@ -19,12 +19,14 @@ export default new Router({
       component: HomeView
     },
     {
-      path: '/button',
-      component: ButtonView
-    },
-    {
-      path: '/menu',
-      component: MenuView
+      path: '/post',
+      component: PostListView,
+      children: [
+        {
+          path: '/',
+          component: PostList
+        },
+      ]
     },
     {
       path: '/test',

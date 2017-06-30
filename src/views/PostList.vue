@@ -159,7 +159,7 @@
 		padding-right: 20px;
 	}
 	.list li{
-		border-bottom:  1px solid #a5a5a5;
+		border-bottom:  1px solid #e4e4e4;
 		margin-bottom:  10px;
 	}
 	.list li .top{

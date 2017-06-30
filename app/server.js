@@ -7,6 +7,8 @@ const favicon = require('koa-favicon')
 const compression = require('koa-compress')
 const router = require('koa-router')()
 
+const userRouter = require('./router/user')
+
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 
@@ -148,11 +150,21 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 
 // api router
-router.get('/api', (ctx, next) => {
-  ctx.type = 'html'
-  ctx.body = 'api router'
-})
+// router.get('/api', (ctx, next) => {
+//   ctx.type = 'html'
+//   ctx.body = 'api router'
+// })
+/*
+router.use('api/user', userRouter.routes())
 
+
+app.use(router.routes())
+   .use(router.allowedMethods())
+*/
+
+// routes definition
+router.use('/api/user', userRouter.routes())
+// mount root routes
 app.use(router.routes()).use(router.allowedMethods())
 
 const port = process.env.PORT || (isProd ? 8902 : 3030)

@@ -5,10 +5,23 @@ const Koa = require('koa')
 const LRU = require('lru-cache')
 const favicon = require('koa-favicon')
 const compression = require('koa-compress')
+const json = require('koa-json')
+const logger = require('koa-logger')
+const bodyParser = require('koa-bodyparser')
 const router = require('koa-router')()
-
+const mongoose = require('mongoose')
+const config = require('./config')
+mongoose.Promise = require('bluebird')
+mongoose.connect(config.dbUrl)
+mongoose.connection.on('connected', () => {
+  console.log(`Mongoose connection open to: ${config.dbUrl}`);
+})
+// 引入相关模型
+require('./models/user')
+// 引入路由
+const isAdmin = require('./config/isAdmin')
 const userRouter = require('./router/user')
-
+// 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 
@@ -16,28 +29,30 @@ const microCache = LRU({
   max: 100,
   maxAge: 1200
 })
-
 const titles = {
   '/': 'naice',
   '/home': 'naice'
 }
 const cacheUrls = ['/', '/home']
-
 const isCacheable = ctx => cacheUrls.indexOf(ctx.url) >= 0 && useMicroCache
-
 const resolve = file => path.resolve(__dirname, file)
-
 // 创建 koa 实例
 const app = new Koa()
+// 全局中间件
+app.use(bodyParser())
+app.use(json())
+app.use(logger())
 
 // 静态资源缓存函数
 const serve = (filepath, cache) => require('koa-static')(resolve(filepath), {
   maxage: cache && isProd ? 60 * 60 * 24 * 30 : 0
 })
+
 // 渲染模板
 const template = fs.readFileSync(resolve('../src/index.template.html'), 'utf-8')
+
 // 穿件渲染
-function createRenderer(bundle, options) {
+function createRenderer (bundle, options) {
   return require('vue-server-renderer').createBundleRenderer(bundle, Object.assign(options, {
     template,
     cache: LRU({
@@ -51,7 +66,6 @@ function createRenderer(bundle, options) {
 
 let renderer
 let readyPromise
-
 if (isProd) {
   const bundle = require('../dist/vue-ssr-server-bundle.json')
   const clientManifest = require('../dist/vue-ssr-client-manifest.json')
@@ -63,22 +77,17 @@ if (isProd) {
     renderer = createRenderer(bundle, options)
   })
 }
-
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./public/favicon.ico'))
 app.use(serve('../public', true))
 app.use(serve('../dist', true))
 
-/* eslint-disable consistent-return */
-// render middleware
+// 渲染中间件
 function render(ctx, next) {
   const start = Date.now()
-
   console.log('url:', ctx.url)
-
   ctx.type = 'html'
   ctx.set('X-Powered-By', 'Koa Vue SSR')
-
   // set ctx.body as stream
   const PassThrough = require('stream').PassThrough
   ctx.body = new PassThrough()
@@ -86,7 +95,6 @@ function render(ctx, next) {
     console.log('renderer is not found')
     return ctx.body.end('waiting for compilation... refresh in a moment.')
   }
-
   // hit micro cache
   const cacheable = isCacheable(ctx)
   if (cacheable) {
@@ -99,14 +107,12 @@ function render(ctx, next) {
       return
     }
   }
-
   let html = ''
   ctx.body.on('data', (chunk) => {
     if (cacheable) {
       html += chunk.toString()
     }
   })
-
   const handleError = (err) => {
     if (err.url) {
       ctx.body.end('')
@@ -122,7 +128,6 @@ function render(ctx, next) {
       console.error(err.stack)
     }
   }
-
   const handleStreamEnd = () => {
     if (cacheable) {
       // set micro cache
@@ -132,42 +137,27 @@ function render(ctx, next) {
       console.log(`whole request: ${Date.now() - start}ms`)
     }
   }
-
   const context = {
     title: titles[ctx.url] || 'Koa-Vue-SSR',
     url: ctx.url
   }
-
   renderer.renderToStream(context)
-    .on('error', handleError)
-    .on('end', handleStreamEnd)
-    .pipe(ctx.body)
+          .on('error', handleError)
+          .on('end', handleStreamEnd)
+          .pipe(ctx.body)
 }
-
-// Not matched /api uri
+// 如果不是 api 的路由的直接跳 next
 router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
   readyPromise.then(() => render(ctx, next))
 })
-
-// api router
-// router.get('/api', (ctx, next) => {
-//   ctx.type = 'html'
-//   ctx.body = 'api router'
-// })
-/*
-router.use('api/user', userRouter.routes())
-
-
-app.use(router.routes())
-   .use(router.allowedMethods())
-*/
-
+// 后台登录认证
 // routes definition
-router.use('/api/user', userRouter.routes())
-// mount root routes
+router.use('/api/user', isAdmin, userRouter.routes())
+// 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 
-const port = process.env.PORT || (isProd ? 8902 : 3030)
+const port = process.env.PORT || (
+    isProd ? 8902 : 3030)
 app.listen(port, () => {
   console.log(`server started at http://127.0.0.1:${port}`)
 })

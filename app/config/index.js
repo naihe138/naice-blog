@@ -4,5 +4,6 @@
  * @date 2017/7/4
  */
 module.exports = {
-  dbUrl: 'mongodb://localhost/blog'
+  dbUrl: 'mongodb://localhost/blog',
+  md5Pre: '!@#$%(*&^)'
 }

@@ -3,12 +3,17 @@
  * @author 何文林
  * @date 2017/7/3
  */
+const md5 = require('md5')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const config = require('../config/index')
 const user = new User()
 
 const login = async (ctx, next) => {
-  const opts = ctx.request.body
+  const opts = {
+    username: ctx.request.body.username,
+    password: md5(config.md5Pre + ctx.request.body.password)
+  }
   const finduser = await user.query(opts)
   if (finduser) {
     const token = jwt.sign({
@@ -32,7 +37,10 @@ const login = async (ctx, next) => {
 }
 
 const register = async (ctx, next) => {
-  const opts = ctx.request.body
+  const opts = {
+    username: ctx.request.body.username,
+    password: md5(config.md5Pre + ctx.request.body.password)
+  }
   const finduser = await user.query({ username: opts.username })
   if (finduser) {
     ctx.body = {

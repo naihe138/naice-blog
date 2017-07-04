@@ -21,7 +21,6 @@ const verify = function (token, username) {
 }
 
 module.exports = async function (ctx, next) {
-  console.log(ctx.request.url)
   // 如果不是admin，或者是login直接跳过该中间件
   if (ctx.request.url.indexOf('login') !== -1) {
     return next()
@@ -29,12 +28,10 @@ module.exports = async function (ctx, next) {
   if (ctx.request.url.indexOf('api') === -1) {
     return next()
   }
-  console.log('后台登录认证')
   const token = ctx.cookies.get('b_user')
   const username = ctx.cookies.get('b_username')
   if (token) {
     const isA = await verify(token, username)
-    console.log(isA)
     if (isA && isA.username) {
       return next()
     } else {

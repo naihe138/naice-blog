@@ -9,9 +9,10 @@ const verify = function (token, username) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, 'naice', (err, decoded) => {
       if (err) {
-        reject(err)
+        // reject(err)
+        resolve()
       }
-      if (decoded.username === username) {
+      if (decoded && (decoded.username === username)) {
         resolve(decoded)
       } else {
         resolve()
@@ -20,7 +21,7 @@ const verify = function (token, username) {
   })
 }
 
-module.exports = async function (ctx, next) {
+module.exports = async (ctx, next) => {
   // 如果不是admin，或者是login直接跳过该中间件
   if (ctx.request.url.indexOf('login') !== -1) {
     return next()

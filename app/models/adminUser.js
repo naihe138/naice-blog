@@ -3,9 +3,9 @@
  * @author 何文林
  * @date 2017/7/4
  */
-const UserModel = require('../schemas/user')
+const UserModel = require('../schemas/adminUser')
 
-class User {
+class adminUser {
   constructor() {
     this.model = UserModel
   }
@@ -25,4 +25,4 @@ class User {
   }
 }
 
-module.exports = User
+module.exports = adminUser

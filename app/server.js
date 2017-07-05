@@ -17,10 +17,11 @@ mongoose.connection.on('connected', () => {
   console.log(`Mongoose connection open to: ${config.dbUrl}`);
 })
 // 引入相关模型
-require('./models/user')
+require('./models/adminUser')
 // 引入路由
 const isAdmin = require('./config/isAdmin')
-const userRouter = require('./router/user')
+const adminUserRouter = require('./router/adminUser')
+const articleRouter = require('./router/article')
 // 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -51,7 +52,7 @@ const serve = (filepath, cache) => require('koa-static')(resolve(filepath), {
 // 渲染模板
 const template = fs.readFileSync(resolve('../src/index.template.html'), 'utf-8')
 
-// 穿件渲染
+// 创建渲染
 function createRenderer (bundle, options) {
   return require('vue-server-renderer').createBundleRenderer(bundle, Object.assign(options, {
     template,
@@ -152,7 +153,8 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 // 后台登录认证
 // routes definition
-router.use('/api/user', isAdmin, userRouter.routes())
+router.use('/api/user', isAdmin, adminUserRouter.routes())
+router.use('/api/article', isAdmin, articleRouter.routes())
 // 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 

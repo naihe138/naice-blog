@@ -5,14 +5,23 @@
  */
 const md5 = require('md5')
 const jwt = require('jsonwebtoken')
-const User = require('../models/user')
+const adminUser = require('../models/adminUser')
 const config = require('../config/index')
-const user = new User()
+const user = new adminUser()
 
 const login = async (ctx, next) => {
+  const username = ctx.request.body.username;
+  const password = ctx.request.body.password
+  if (!username || !password) {
+    ctx.body = {
+      message: '用户名或者密码为空！',
+      status: false,
+    }
+    return
+  }
   const opts = {
-    username: ctx.request.body.username,
-    password: md5(config.md5Pre + ctx.request.body.password)
+    username,
+    password: md5(config.md5Pre + password)
   }
   const finduser = await user.query(opts)
   if (finduser) {
@@ -37,9 +46,18 @@ const login = async (ctx, next) => {
 }
 
 const register = async (ctx, next) => {
+  const username = ctx.request.body.username
+  const password = ctx.request.body.password
+  if (!username || !password) {
+    ctx.body = {
+      message: '用户名或者密码为空！',
+      status: false,
+    }
+    return
+  }
   const opts = {
-    username: ctx.request.body.username,
-    password: md5(config.md5Pre + ctx.request.body.password)
+    username,
+    password: md5(config.md5Pre + password)
   }
   const finduser = await user.query({ username: opts.username })
   if (finduser) {

@@ -4,34 +4,16 @@
  * @date 2017/6/29
  */
 const router = require('koa-router')()
-// const user = require('../controllers/user')
+const articles = require('../controllers/article')
+const comments = require('../controllers/comment')
 
-router.get('/', (ctx, next) => {
-  ctx.body = {
-    status: true,
-    msg: '获取全部文章接口'
-  }
-})
+router.get('/', articles.getArticles)
+router.post('/add', articles.add)
+router.get('/tag', articles.getTags)
 
-router.get('/:id', (ctx, next) => {
-  ctx.body = {
-    status: true,
-    msg: '获取指定id文章'
-  }
-})
+router.post('/addComment', comments.addComment)
+router.get('/getComment', comments.getComment)
+router.post('/deleteComment', comments.deleteComment)
 
-router.get('/query', (ctx, next) => {
-  ctx.body = {
-    status: true,
-    msg: '查找用户接口'
-  }
-})
-
-router.get('/delete', (ctx, next) => {
-  ctx.body = {
-    status: true,
-    msg: '删除用户接口'
-  }
-})
-
+router.get('/:id', articles.getOneArticle)
 module.exports = router

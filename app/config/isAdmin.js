@@ -31,6 +31,8 @@ module.exports = async (ctx, next) => {
   }
   const token = ctx.cookies.get('b_user')
   const username = ctx.cookies.get('b_username')
+  console.log(token)
+  console.log(username)
   if (token) {
     const isA = await verify(token, username)
     if (isA && isA.username) {

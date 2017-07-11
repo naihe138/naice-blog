@@ -9,6 +9,7 @@ const comments = require('../controllers/comment')
 
 router.get('/', articles.getArticles)
 router.post('/add', articles.add)
+router.post('/edit', articles.editArticle)
 router.get('/tag', articles.getTags)
 
 router.post('/addComment', comments.addComment)

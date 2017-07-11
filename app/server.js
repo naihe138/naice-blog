@@ -10,6 +10,7 @@ const logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
 const router = require('koa-router')()
 const mongoose = require('mongoose')
+const cors = require('koa-cors')
 const config = require('./config')
 mongoose.Promise = require('bluebird')
 mongoose.connect(config.dbUrl)
@@ -43,6 +44,10 @@ const app = new Koa()
 app.use(bodyParser())
 app.use(json())
 app.use(logger())
+app.use(cors({
+  'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/',
+  'Access-Control-Allow-Credentials': true
+}))
 
 // 静态资源缓存函数
 const serve = (filepath, cache) => require('koa-static')(resolve(filepath), {

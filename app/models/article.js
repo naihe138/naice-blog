@@ -20,6 +20,9 @@ class Article {
     const query = this.model.find({}).skip(skip).limit(limit).sort(sort)
     return query.exec()
   }
+  updated(id, opts){
+    return this.model.update({ _id: id }, { $set: opts}).exec();
+  }
   queryTag(tagOpts) {
     return this.model.find(tagOpts).exec()
   }

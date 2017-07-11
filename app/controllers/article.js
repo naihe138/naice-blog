@@ -16,6 +16,7 @@ const add = async (ctx, next) => {
     }
   }
   if (opts.tags) {
+    opts.tags = opts.tags.replace(/，+/g, ',')
     opts.tags = opts.tags.split(',').map(v => v.trim()).filter(v => v)
   }
   const newArticle = await article.save(opts)
@@ -32,11 +33,45 @@ const add = async (ctx, next) => {
     }
   }
 }
+
+const editArticle = async (ctx, next) =>{
+  let opts = ctx.request.body
+  if (!opts.title || !opts.editStr || !opts.contentStr || !opts.describe) {
+    ctx.body = {
+      status: true,
+      message: '缺少标题、描述或者内容'
+    }
+    return
+  }
+  if (opts.tags) {
+    opts.tags = opts.tags.replace(/，+/g, ',')
+    opts.tags = opts.tags.split(',').map(v => v.trim()).filter(v => v)
+  }
+  let prams = {}
+  for(let key in opts){
+    if(key != 'id'){
+      prams[key] = opts[key]
+    }
+  }
+  const editArticle = await article.updated(opts.id, prams)
+  if (editArticle.ok) {
+    ctx.body = {
+      status: true,
+      message: '修改成功'
+    }
+  } else {
+    ctx.body = {
+      status:  false,
+      message: '修改失败'
+    }
+  }
+}
+
 // 获取文章列表
 const getArticles = async (ctx, next) => {
   const opts = ctx.request.body
   const page = opts.page || 0
-  const limit = 8
+  const limit = 10
   const skip = page * limit
   const sort = { 'meta.createAt': -1 }
   const aticles = await article.query(skip, limit, sort)
@@ -105,5 +140,6 @@ module.exports = {
   add,
   getArticles,
   getTags,
-  getOneArticle
+  getOneArticle,
+  editArticle
 }

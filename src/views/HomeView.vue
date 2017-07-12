@@ -9,25 +9,24 @@
 				<p>“对酒当歌,人生几何。譬如朝露,去日苦多”。生命是天际划过的流星，那么短暂，而我们的青春更是如此。作为一个前端开发者。在以后的日子里，需要不断学习，不断进步，保持良好的技术热情，不断成长。做一个有道德，有理想，有纪律，有文化的四有前端开发者。</p>
 			</section>
 			<div class="postBox">
-				<a href="http://naice.me">
+				<router-link to="/articles">
 					<img src="../assets/img/post.png" alt="">
 					<p>文章</p>
-				</a>
-				<a href="http://naice.me">
+				</router-link>
+				<router-link to="/post">
 					<img src="../assets/img/project.png" alt="">
 					<p>项目</p>
-				</a>
+				</router-link>
 			</div>
 		</div>
 	</div>
-
 </template>
 
 <script>
   import Aside from '../components/aside'
 
   export default {
-    title() {
+    title () {
       return 'Naice Blog'
     },
     components: {
@@ -86,7 +85,7 @@
 	}
 
 	.aboutMe p {
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 20px;
 	}
 

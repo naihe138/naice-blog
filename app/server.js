@@ -45,7 +45,7 @@ app.use(bodyParser())
 app.use(json())
 app.use(logger())
 app.use(cors({
-  'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Credentials': true
 }))
 
@@ -158,8 +158,12 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 // 后台登录认证
 // routes definition
-router.use('/api/user', isAdmin, adminUserRouter.routes())
-router.use('/api/article', isAdmin, articleRouter.routes())
+// router.use('/api/user', isAdmin, adminUserRouter.routes())
+// router.use('/api/article', isAdmin, articleRouter.routes())
+
+// 前端调试
+router.use('/api/user', adminUserRouter.routes())
+router.use('/api/article', articleRouter.routes())
 // 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 

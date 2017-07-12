@@ -4,7 +4,7 @@ import Vue from 'vue'
 import { app, store, router } from './app'
 
 Vue.mixin({
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     const { asyncData } = this.$options
     if (asyncData) {
       asyncData({

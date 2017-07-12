@@ -1,15 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import * as getters from './getters'
+// test
+import addArr from './modules/count'
+// articel
+import articles from './modules/articles'
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   state: {
-    activeType: 'home',
-    articles: [],  // 文章列表
-    accounts: [], // 微信公众号列表
-    category: [], // 公众号分类列表
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  },
+  getters,
+  modules: {
+    addArr,
+    articles
   }
 })
-
-export default store

@@ -25,7 +25,7 @@
 					</a>
 				</div>
 			</div>
-			<transition name="fade" mode="out-in">
+			<transition name="articlefade" mode="out-in">
 				<router-view></router-view>
 			</transition>
 		</section>
@@ -36,7 +36,7 @@
   import Aside from '../components/aside'
 
   export default {
-    title() {
+    title () {
       return 'Naice Blog'
     },
     components: {

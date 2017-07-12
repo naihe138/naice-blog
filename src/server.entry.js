@@ -12,9 +12,9 @@ export default context => new Promise((resolve, reject) => {
   const s = isDev && Date.now()
   const { url } = context
   const fullPath = router.resolve(url).route.fullPath
-
   if (url !== fullPath) {
-    reject({ url: fullPath })
+    // reject({ url: fullPath })
+    reject(new Error({ url: fullPath }))
   }
 
     // set router's location
@@ -25,8 +25,10 @@ export default context => new Promise((resolve, reject) => {
     const matchedComponents = router.getMatchedComponents()
       // no matched routes
     if (!matchedComponents.length) {
-      reject({ code: 404 })
+      // reject({ code: 404 })
+      reject(new Error({ code: 404 }))
     }
+    console.log(router.currentRoute)
     Promise.all(matchedComponents.map((component) => {
       if (component.asyncData) {
         return component.asyncData({

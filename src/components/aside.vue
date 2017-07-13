@@ -6,7 +6,7 @@
 <template>
 	<div class="aside-box">
 		<div class="aside-content">
-			<router-link to="/articles">
+			<router-link to="/">
 				<img src="../assets/img/averter.jpg" alt="">
 			</router-link>
 			<h1>Naice &nbsp;Blog</h1>

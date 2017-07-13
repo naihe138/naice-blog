@@ -23,9 +23,9 @@
 				</div>
 			</li>
 		</ul>
-		<div class="footer">
-			<a href="">prev</a>
-			<a href="">next</a>
+		<div class="footer" v-if="showPageBtn" :title="currunPage" :count="count">
+			<span class="prev" v-if="showPrev"></span>
+			<span class="next" v-if="showNext" @click="toNextPage()"></span>
 		</div>
 	</div>
 </template>
@@ -33,9 +33,32 @@
 <script>
   import * as type from '../store/mutation-types'
   export default{
+    data () {
+      return {
+        showPageBtn: true,
+        showPrev: true,
+        showNext: true
+      }
+    },
     computed: {
       articels () {
         return this.$store.getters.articles
+      },
+      count () {
+        let totalPage = Math.floor(this.$store.getters.count / 10)
+        if (totalPage === 0) {
+          this.showPageBtn = false
+        }
+        return totalPage
+      },
+      currunPage () {
+        let cPage = this.$store.getters.currunPage
+        if (cPage === 0) {
+          this.showPrev = false
+        } else if (cPage >= this.count) {
+          this.showNext = false
+        }
+        return cPage
       }
     },
     methods: {
@@ -54,6 +77,20 @@
       },
       goDetail (id) {
         this.$router.push(`/articles/${id}`)
+      },
+      toNextPage () {
+        if (this.currunPage + 1 > this.count) {
+          alert('没有更多了')
+          return
+        }
+        this.getArticle(this.currunPage + 1)
+      },
+      toPrevPage () {
+        if (this.currunPage - 1 < this.count) {
+          alert('已经是第一页了')
+          return
+        }
+        this.getArticle(this.currunPage - 1)
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -88,6 +125,10 @@
 	.list li {
 		border-bottom: 1px solid #e4e4e4;
 		margin-bottom: 10px;
+	}
+
+	.list li:last-child {
+		border: none;
 	}
 
 	.list li .top {
@@ -157,8 +198,37 @@
 	}
 
 	.footer {
-		display: flex;
-		justify-content: space-between;
-		padding: 20px 20px 20px 0;
+		display: block;
+		clear: both;
+		padding: 30px 20px 20px 0;
+		position: relative;
+	}
+
+	.footer span {
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		background-size: cover;
+		cursor: pointer;
+		transition: 0.3s;
+		position: absolute;
+	}
+
+	.footer span.prev {
+		background-image: url("../assets/img/prev.png");
+		left: 0;
+	}
+
+	.footer span.prev:hover {
+		transform: rotate(-45deg);
+	}
+
+	.footer span.next:hover {
+		transform: rotate(45deg);
+	}
+
+	.footer span.next {
+		background-image: url("../assets/img/next.png");
+		right: 30px;
 	}
 </style>

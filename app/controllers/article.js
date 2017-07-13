@@ -75,9 +75,11 @@ const getArticles = async (ctx, next) => {
   const skip = page * limit
   const sort = { 'meta.createAt': -1 }
   const aticles = await article.query(skip, limit, sort)
+  const count = await article.queryCount({})
   if (aticles && aticles.length > 0) {
     ctx.body = {
       status: true,
+      count,
       aticles
     }
   } else {
@@ -103,11 +105,12 @@ const getTags = async (ctx, next) => {
       $all: tagArr
     }
   }
-  console.log(tagOpts)
   const aticles = await article.queryTag(tagOpts)
+  const count = await article.queryCount(tagOpts)
   if (aticles && aticles.length > 0) {
     ctx.body = {
       status: true,
+      count,
       aticles
     }
   } else {

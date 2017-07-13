@@ -20,6 +20,9 @@ class Article {
     const query = this.model.find({}).skip(skip).limit(limit).sort(sort)
     return query.exec()
   }
+  queryCount(opts) {
+    return this.model.count(opts)
+  }
   updated(id, opts){
     return this.model.update({ _id: id }, { $set: opts}).exec();
   }

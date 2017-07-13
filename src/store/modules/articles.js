@@ -5,12 +5,14 @@ import axios from '../../utils/axios'
 // state
 const state = {
   articles: [],
+  count: 0,
   oneArticle: {}
 }
 
 // getters
 const getters = {
   articles: state => state.articles,
+  count: state => state.count,
   oneArticle: state => state.oneArticle
 }
 
@@ -24,6 +26,7 @@ const actions = {
     const articels = await axios.get(server.getArticles, prams)
     if (articels.aticles) {
       commit(types.GET_ARTICLE, articels.aticles)
+      commit(types.GET_COUNT, articels.count)
     } else {
       alert('请求出错')
     }
@@ -34,11 +37,12 @@ const actions = {
     console.log(articels)
     if (articels.aticles) {
       commit(types.GET_TAGS, articels.aticles)
+      commit(types.GET_COUNT, articels.count)
     } else {
       alert('请求出错')
     }
   },
-  // 获取文章列表
+  // 获取某一篇
   async [types.GET_ARTICLEBYID] ({commit}, id) {
     let data = {}
     if (state.articles && state.articles.length > 0) {
@@ -69,6 +73,9 @@ const mutations = {
   },
   [types.GET_ARTICLEBYID] (state, data) {
     state.oneArticle = data
+  },
+  [types.GET_COUNT] (state, n) {
+    state.count = n
   }
 }
 

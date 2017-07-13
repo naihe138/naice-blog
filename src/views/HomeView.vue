@@ -10,13 +10,13 @@
 			</section>
 			<div class="postBox">
 				<router-link to="/articles">
-				<img src="../assets/img/post.png" alt="">
-				<p>文章</p>
-			</router-link>
-				<router-link to="/post">
+					<img src="../assets/img/post.png" alt="">
+					<p>文章</p>
+				</router-link>
+				<a href="javascript:alert('页面正在开发ing')">
 					<img src="../assets/img/project.png" alt="">
 					<p>项目</p>
-				</router-link>
+				</a>
 			</div>
 		</div>
 	</div>

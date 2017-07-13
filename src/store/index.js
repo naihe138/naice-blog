@@ -10,13 +10,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    progress: 0
+    progress: 0,
+    currunPage: 0
   },
   getters,
   actions,
   mutations: {
     progress (state, payload) {
       state.progress = payload
+    },
+    setPage (state, page) {
+      state.currunPage = page
     }
   },
   modules: {

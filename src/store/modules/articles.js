@@ -53,6 +53,9 @@ const actions = {
         alert('请求出错啦')
       }
     }
+  },
+  async [types.ADD_COMMENT] ({commit}, id) {
+    console.log(123)
   }
 }
 

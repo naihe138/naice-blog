@@ -15,11 +15,11 @@
 					<span></span>
 				</div>
 				<div class="postBox">
-					<a href="http://naice.me">
+					<router-link to="/articles">
 						<img src="../assets/img/post.png" alt="">
 						<p>文章</p>
-					</a>
-					<a href="http://naice.me">
+					</router-link>
+					<a href="javascript: alert('页面正在研发ing')">
 						<img src="../assets/img/project.png" alt="">
 						<p>项目</p>
 					</a>
@@ -28,19 +28,22 @@
 			<transition name="articlefade" mode="out-in">
 				<router-view></router-view>
 			</transition>
+			<copy-right></copy-right>
 		</section>
 	</div>
 </template>
 
 <script>
   import Aside from '../components/aside'
+  import Copyright from '../components/footer.vue'
 
   export default {
     title () {
       return 'Naice Blog'
     },
     components: {
-      'a-side': Aside
+      'a-side': Aside,
+      'copy-right': Copyright
     }
   }
 </script>

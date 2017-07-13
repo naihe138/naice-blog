@@ -31,6 +31,11 @@
     },
     components: {
       'a-side': Aside
+    },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.$store.dispatch('progress', 100)
+      })
     }
   }
 </script>
@@ -41,11 +46,13 @@
 		--titleColor: #3e3e3e; /*标题颜色*/
 		--lineColor: #3fb76c; /*线条绿色*/
 	}
-	.homePage{
+
+	.homePage {
 		width: 100%;
 		height: 100%;
 		display: flex;
 	}
+
 	#aside {
 		width: 50%;
 		height: 100%;
@@ -53,6 +60,7 @@
 		background-size: cover;
 		transition: width 0.3s;
 	}
+
 	.home-view {
 		display: flex;
 		justify-content: center;

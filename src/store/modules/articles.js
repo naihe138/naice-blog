@@ -34,7 +34,6 @@ const actions = {
   // 获取标签文章列表
   async [types.GET_TAGS] ({commit}, prams = {}) {
     const articels = await axios.get(server.tag, prams)
-    console.log(articels)
     if (articels.aticles) {
       commit(types.GET_TAGS, articels.aticles)
       commit(types.GET_COUNT, articels.count)

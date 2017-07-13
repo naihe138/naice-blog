@@ -86,7 +86,8 @@
 
 	.aboutMe p {
 		font-size: 14px;
-		line-height: 20px;
+		line-height: 1.75;
+		text-indent: 28px;
 	}
 
 	.postBox {

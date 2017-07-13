@@ -112,6 +112,7 @@
 	.markdown p {
 		font-size: 14px;
 		text-indent: 28px;
+		line-height: 1.75;
 	}
 
 	.markdown h1,

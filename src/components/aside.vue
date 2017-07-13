@@ -6,7 +6,9 @@
 <template>
 	<div class="aside-box">
 		<div class="aside-content">
-			<img src="../assets/img/averter.jpg" alt="">
+			<router-link to="/articles">
+				<img src="../assets/img/averter.jpg" alt="">
+			</router-link>
 			<h1>Naice &nbsp;Blog</h1>
 			<p>每一个不曾起舞的日子，都是对声明的辜负。</p>
 			<div class="aside-icon">

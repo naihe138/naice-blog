@@ -17,6 +17,10 @@ Vue.mixin({
   }
 })
 
+router.beforeEach((route, redirect, next) => {
+  store.dispatch('progress', 0)
+  next()
+})
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
 if (window.__INITIAL_STATE__) {

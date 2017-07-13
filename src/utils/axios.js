@@ -1,4 +1,26 @@
 import axios from 'axios'
+import store from '../store'
+axios.interceptors.request.use(config => {
+  store.dispatch('progress', 50)
+  return config
+}, error => {
+  return Promise.reject(error)
+})
+
+function checkStatus (response) {
+  store.dispatch('progress', 100)
+  if (response.status === 200 || response.status === 304) {
+    return response
+  }
+  return {
+    data: {
+      code: -404,
+      message: response.statusText,
+      data: ''
+    }
+  }
+}
+
 export default {
   post (url, data) {
     return axios({
@@ -11,7 +33,7 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/json; charset=UTF-8'
       }
-    }).then(data => data.data).catch(err => err)
+    }).then(checkStatus).then(data => data.data).catch(err => err)
   },
   get (url, params) {
     return axios({
@@ -23,6 +45,6 @@ export default {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
-    }).then(data => data.data).catch(err => err)
+    }).then(checkStatus).then(data => data.data).catch(err => err)
   }
 }

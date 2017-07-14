@@ -69,7 +69,7 @@ const editArticle = async (ctx, next) =>{
 
 // 获取文章列表
 const getArticles = async (ctx, next) => {
-  const opts = ctx.request.body
+  const opts = querystring.parse(ctx.request.url.split('?')[1])
   const page = opts.page || 0
   const limit = 10
   const skip = page * limit

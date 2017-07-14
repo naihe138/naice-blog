@@ -23,10 +23,11 @@
 				</div>
 			</li>
 		</ul>
-		<div class="footer" v-if="showPageBtn" :title="currunPage" :count="count">
+		<div class="footer" v-if="showPageBtn">
 			<span class="prev" v-if="showPrev"></span>
 			<span class="next" v-if="showNext" @click="toNextPage()"></span>
 		</div>
+		<span>{{currunPage}}{{count}}</span>
 	</div>
 </template>
 
@@ -46,6 +47,7 @@
       },
       count () {
         let totalPage = Math.floor(this.$store.getters.count / 10)
+        console.log(totalPage)
         if (totalPage === 0) {
           this.showPageBtn = false
         }
@@ -79,6 +81,8 @@
         this.$router.push(`/articles/${id}`)
       },
       toNextPage () {
+        console.log(this.currunPage)
+        console.log(this.count)
         if (this.currunPage + 1 > this.count) {
           alert('没有更多了')
           return

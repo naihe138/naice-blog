@@ -16,11 +16,9 @@
 				</div>
 				<div class="postBox">
 					<router-link to="/articles">
-						<img src="../assets/img/post.png" alt="">
 						<p>文章</p>
 					</router-link>
-					<a href="javascript: alert('页面正在研发ing')">
-						<img src="../assets/img/project.png" alt="">
+					<a target="_blank" href="https://github.com/naihe138?tab=repositories">
 						<p>项目</p>
 					</a>
 				</div>
@@ -117,13 +115,31 @@
 	}
 
 	.postBox a {
-		text-decoration: none;
-		color: #cccccc;
-		text-align: center;
-	}
-
-	.postBox img {
 		width: 30px;
 		height: 30px;
+		text-decoration: none;
+		color: #666;
+		text-align: center;
+		background-image: url('../assets/img/top-icon.png');
+		background-size: 60px 60px;
+	}
+	.postBox a p{
+		padding-top: 30px;
+	}
+	.postBox a:nth-of-type(1){
+		 background-position: -30px 0px;
+	 }
+	.postBox a:nth-of-type(2){
+		background-position: 0px 0px;
+	}
+
+	.postBox a:nth-of-type(1):hover{
+		background-position: -30px 30px;
+	}
+	.postBox a:nth-of-type(2):hover{
+		background-position: -0px -30px;
+	}
+	.postBox a:hover p{
+		color: var(--lineColor);
 	}
 </style>

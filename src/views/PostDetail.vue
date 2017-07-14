@@ -31,6 +31,7 @@
 <script>
   import * as types from '../store/mutation-types'
   import Gitment from 'gitment'
+  import GitComent from '../config/github-comment'
 
   export default{
     computed: {
@@ -48,10 +49,10 @@
       this.$store.dispatch(types.GET_ARTICLEBYID, id)
       const gitment = new Gitment({
         owner: 'naihe138',
-        repo: 'naice-blog-comment',
+        repo: GitComent.comment_repo,
         oauth: {
-          client_id: '0c0956ba373da1bc72e4',
-          client_secret: '07a5e0be06660df9efbd6169a1d2ab0abb8edfc3'
+          client_id: GitComent.client_id,
+          client_secret: GitComent.client_secret
         }
       })
       this.$nextTick(() => {
@@ -63,6 +64,7 @@
 
 <style>
 	@import "gitment/style/default.css";
+
 	:root {
 		--fontColor: #5e5e5e; /*文字颜色*/
 		--titleColor: #3e3e3e; /*标题颜色*/

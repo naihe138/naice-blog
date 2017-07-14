@@ -5,6 +5,7 @@
 */
 <template>
 	<div class="aside-box">
+		<div class="marsk"></div>
 		<div class="aside-content">
 			<router-link to="/">
 				<img src="../assets/img/averter.jpg" alt="">
@@ -12,8 +13,8 @@
 			<h1>Naice &nbsp;Blog</h1>
 			<p>每一个不曾起舞的日子，都是对声明的辜负。</p>
 			<div class="aside-icon">
-				<a href="http://naice.me"></a>
-				<a href="http://naice.me"></a>
+				<a href="https://github.com/naihe138"></a>
+				<a href="https://segmentfault.com/u/naice"></a>
 			</div>
 		</div>
 	</div>
@@ -37,18 +38,31 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background: url("../assets/img/aside-bg.jpg") no-repeat center center;
 	}
-
+	.marsk{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgba(255,255,255,0.5);
+	}
 	.aside-content {
 		width: 300px;
 		height: 400px;
 		/*border: 1px solid red;*/
 		text-align: center;
+		position: relative;
+		z-index: 2;
 	}
 	.aside-content img {
 		width: 100px;
 		height: 100px;
 		border-radius: 50%;
+		transition: transform 0.5s;
+	}
+
+	.aside-content img:hover{
+		transform: rotate(360deg);
 	}
 
 	.aside-content h1 {
@@ -78,19 +92,25 @@
 		justify-content: center;
 	}
 	.aside-icon a{
-		width: 30px;
-		height: 30px;
+		width: 34px;
+		height: 34px;
 		background-color: #5e5e5e;
-		background-size: 90% 90%;
-		background-position: center center;
+		background-size: 60px 30px;
 		background-repeat: no-repeat;
 		margin: 0 10px;
 		cursor: pointer;
+		transition: background-color 0.3s;
+		background-image: url("../assets/img/link-icon.png");
+		border-radius: 2px;
+	}
+	.aside-icon a:hover{
+		background-color: var(--lineColor);
 	}
 	.aside-icon a:nth-of-type(1){
-		background-image: url("../assets/img/github.png");
+		background-position: -28px 2px;
 	}
 	.aside-icon a:nth-of-type(2){
-		background-image: url("../assets/img/segmentfault.png");
+		/*background-image: url("../assets/img/segmentfault.png");*/
+		background-position: 3px 2px;
 	}
 </style>

@@ -11,7 +11,7 @@
 		<section class="listBox">
 			<div class="headerBox">
 				<div class="serch">
-					<input type="text" placeholder="serch...">
+					<input v-model="title" @keyup.enter="serch" type="text" placeholder="serch...">
 					<span></span>
 				</div>
 				<div class="postBox">
@@ -34,54 +34,74 @@
 <script>
   import Aside from '../components/aside'
   import Copyright from '../components/footer.vue'
+  import * as type from '../store/mutation-types'
 
   export default {
     title () {
       return 'Naice Blog'
     },
+    data () {
+      return {
+        title: ''
+      }
+    },
     components: {
       'a-side': Aside,
       'copy-right': Copyright
+    },
+    methods: {
+      serch () {
+        if (this.title) {
+          this.$store.dispatch(type.GET_SERCH, {title: this.title})
+          this.$router.push(`articles?serch=${this.title}`)
+        }
+      }
     }
   }
 </script>
 
 <style scoped>
-	:root{
+	:root {
 		--fontColor: #5e5e5e; /*文字颜色*/
 		--titleColor: #3e3e3e; /*标题颜色*/
 		--lineColor: #3fb76c; /*线条绿色*/
 	}
-	#postListView{
+
+	#postListView {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		overflow: hidden;
 	}
+
 	.aside {
 		width: 380px;
 		height: 100%;
 		background: #cccccc;
 	}
-	.listBox{
+
+	.listBox {
 		flex: 1;
 		position: relative;
 		box-sizing: border-box;
 		padding-left: 30px;
 		overflow: auto;
 	}
-	.headerBox{
+
+	.headerBox {
 		height: 70px;
 		position: relative;
 		overflow: hidden;
 	}
-	.headerBox .serch{
+
+	.headerBox .serch {
 		width: 300px;
 		height: 28px;
 		margin-top: 20px;
 		position: relative;
 	}
-	.headerBox .serch span{
+
+	.headerBox .serch span {
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -90,19 +110,23 @@
 		background: #939393;
 		transition: width 0.3s;
 	}
-	.headerBox .serch input{
+
+	.headerBox .serch input {
 		outline: none;
 		width: 300px;
 		height: 28px;
 		text-indent: 10px;
 		color: var(--fontColor);
 	}
-	.headerBox .serch input:focus + span{
+
+	.headerBox .serch input:focus + span {
 		width: 100%;
 	}
-	.headerBox .serch input:focus{
+
+	.headerBox .serch input:focus {
 		border-color: green;
 	}
+
 	.postBox {
 		position: absolute;
 		width: 80px;
@@ -123,23 +147,28 @@
 		background-image: url('../assets/img/top-icon.png');
 		background-size: 60px 60px;
 	}
-	.postBox a p{
+
+	.postBox a p {
 		padding-top: 30px;
 	}
-	.postBox a:nth-of-type(1){
-		 background-position: -30px 0px;
-	 }
-	.postBox a:nth-of-type(2){
+
+	.postBox a:nth-of-type(1) {
+		background-position: -30px 0px;
+	}
+
+	.postBox a:nth-of-type(2) {
 		background-position: 0px 0px;
 	}
 
-	.postBox a:nth-of-type(1):hover{
+	.postBox a:nth-of-type(1):hover {
 		background-position: -30px 30px;
 	}
-	.postBox a:nth-of-type(2):hover{
+
+	.postBox a:nth-of-type(2):hover {
 		background-position: -0px -30px;
 	}
-	.postBox a:hover p{
+
+	.postBox a:hover p {
 		color: var(--lineColor);
 	}
 </style>

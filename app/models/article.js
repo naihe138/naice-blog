@@ -23,7 +23,10 @@ class Article {
   queryCount(opts) {
     return this.model.count(opts)
   }
-  updated(id, opts){
+  queryAll() {
+    return this.model.find({}).exec()
+  }
+  updated(id, opts) {
     return this.model.update({ _id: id }, { $set: opts}).exec();
   }
   queryTag(tagOpts) {

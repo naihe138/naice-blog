@@ -31,6 +31,18 @@ const actions = {
       alert('请求出错')
     }
   },
+  // 搜索文章
+  async [types.GET_SERCH] ({commit}, prams = {}) {
+    console.log(123)
+    const articels = await axios.get(server.serchArticles, prams)
+    if (articels.aticles) {
+      console.log(articels)
+      commit(types.GET_ARTICLE, articels.aticles)
+      commit(types.GET_COUNT, articels.count)
+    } else {
+      alert('请求出错')
+    }
+  },
   // 获取标签文章列表
   async [types.GET_TAGS] ({commit}, prams = {}) {
     const articels = await axios.get(server.tag, prams)

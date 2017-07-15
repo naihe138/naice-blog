@@ -5,7 +5,7 @@
 */
 <template>
 	<div id="postlist">
-		<ul class="list">
+		<ul class="list" v-show="articels.length">
 			<li v-for="item in articels">
 				<div class="top">
 					<h2><a href="javascript:void(0)" @click="goDetail(item._id)">{{item.title}}</a></h2>
@@ -23,6 +23,7 @@
 				</div>
 			</li>
 		</ul>
+		<p class="nothing" v-show="articels.length === 0">nothing...</p>
 		<div class="footer" v-if="showPageBtn">
 			<span class="prev" v-if="showPrev"></span>
 			<span class="next" v-if="showNext" @click="toNextPage()"></span>
@@ -234,5 +235,10 @@
 	.footer span.next {
 		background-image: url("../assets/img/next.png");
 		right: 30px;
+	}
+	.nothing{
+		text-align: center;
+		line-height: 100px;
+		color: #666;
 	}
 </style>

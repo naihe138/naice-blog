@@ -11,7 +11,6 @@ class adminUser {
   }
   save(opts) {
     this.entity = new UserModel(opts)
-    console.log(this.entity)
     return this.entity.save()
   }
   query(opts) {

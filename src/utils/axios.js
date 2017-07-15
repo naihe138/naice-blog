@@ -33,7 +33,10 @@ export default {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/json; charset=UTF-8'
       }
-    }).then(checkStatus).then(data => data.data).catch(err => err)
+    }).then(checkStatus).then(data => data.data).catch(err => {
+      // location.href = '/'
+      return err
+    })
   },
   get (url, params) {
     return axios({
@@ -45,6 +48,9 @@ export default {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
-    }).then(checkStatus).then(data => data.data).catch(err => err)
+    }).then(checkStatus).then(data => data.data).catch(err => {
+      // location.href = '/'
+      return err
+    })
   }
 }

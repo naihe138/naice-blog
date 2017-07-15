@@ -89,6 +89,29 @@ const getArticles = async (ctx, next) => {
     }
   }
 }
+// 获取所有文章
+const getAllArticles = async (ctx, next) => {
+  const opts = querystring.parse(ctx.request.url.split('?')[1])
+  const reg = new RegExp(opts.title,'g')
+  const aticles = await article.queryAll()
+  if (aticles && aticles.length > 0) {
+    let ret = aticles.filter(item => {
+      const num = item.title.search(reg)
+      return num >= 0
+    })
+    console.log(ret.length)
+    ctx.body = {
+      status: true,
+      count: ret.length,
+      aticles: ret
+    }
+  } else {
+    ctx.body = {
+      status: false,
+      data: aticles
+    }
+  }
+}
 // 根据 tag 下面所有的文章
 const getTags = async (ctx, next) => {
   let urlQuery = querystring.parse(ctx.request.url.split('?')[1])
@@ -144,5 +167,6 @@ module.exports = {
   getArticles,
   getTags,
   getOneArticle,
-  editArticle
+  editArticle,
+  getAllArticles
 }

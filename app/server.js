@@ -158,7 +158,6 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 // 后台登录认证
 // routes definition
-// router.use('/api/user', isAdmin, adminUserRouter.routes())
 // router.use('/api/article', isAdmin, articleRouter.routes())
 
 // 前端调试

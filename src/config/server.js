@@ -1,9 +1,9 @@
 const isProd = process.env.NODE_ENV === 'production'
 let bastUrl = ''
 if (isProd) {
-  bastUrl = 'http://127.0.0.1:8902/api'
+  bastUrl = 'http://127.0.0.1:8902/api/front'
 } else {
-  bastUrl = 'http://127.0.0.1:3030/api'
+  bastUrl = 'http://127.0.0.1:3030/api/front'
 }
 export default {
   // 获取文章列表

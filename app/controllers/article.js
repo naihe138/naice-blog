@@ -61,7 +61,7 @@ const editArticle = async (ctx, next) =>{
     }
   } else {
     ctx.body = {
-      status:  false,
+      status: false,
       message: '修改失败'
     }
   }

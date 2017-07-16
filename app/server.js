@@ -23,6 +23,7 @@ require('./models/adminUser')
 const isAdmin = require('./config/isAdmin')
 const adminUserRouter = require('./router/adminUser')
 const articleRouter = require('./router/article')
+const fArticleRouter = require('./router/fArticle')
 // 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -33,9 +34,9 @@ const microCache = LRU({
 })
 const titles = {
   '/': 'naice',
-  '/home': 'naice'
+  '/articles': 'naice'
 }
-const cacheUrls = ['/', '/home']
+const cacheUrls = ['/', '/articles']
 const isCacheable = ctx => cacheUrls.indexOf(ctx.url) >= 0 && useMicroCache
 const resolve = file => path.resolve(__dirname, file)
 // 创建 koa 实例
@@ -63,7 +64,7 @@ function createRenderer (bundle, options) {
     template,
     cache: LRU({
       max: 1000,
-      maxAge: 1000 * 60 * 15,
+      maxAge: 1000 * 60 * 15
     }),
     basedir: resolve('../dist'),
     runInNewContext: false
@@ -158,11 +159,11 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 // 后台登录认证
 // routes definition
-// router.use('/api/article', isAdmin, articleRouter.routes())
+router.use('/api/backstage/user', isAdmin, adminUserRouter.routes())
+router.use('/api/backstage/article', isAdmin, articleRouter.routes())
 
 // 前端调试
-router.use('/api/user', adminUserRouter.routes())
-router.use('/api/article', articleRouter.routes())
+router.use('/api/front/article', fArticleRouter.routes())
 // 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 

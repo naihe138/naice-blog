@@ -12,6 +12,14 @@
 			</div>
 			<!--<p class="date">{{oneArticle.meta ? oneArticle.meta.updateAt.substring(0, 10) : ''}}</p>-->
 			<div class="markdown" v-html="oneArticle.contentStr"></div>
+			<div class="shearBox">
+				<a target="_blank" :href="'http://connect.qq.com/widget/shareqq/index.html?url='+url+'&title='+oneArticle.title+'&source=http://img.store.naice.me/averter.jpg#_naice'"  class="iconfont">&#xe602;</a>
+				<a target="_blank" :href="'http://service.weibo.com/share/share.php?url='+url+'&title='+oneArticle.title+'&pic=http://img.store.naice.me/averter.jpg#_naice'" class="iconfont">&#xe832;</a>
+				<a target="_blank" :href="'https://www.douban.com/share/service?href='+url+'&name='+oneArticle.title+'&image=http://img.store.naice.me/averter.jpg#_naice'" class="iconfont">&#xe663;</a>
+				<a target="_blank" :href="'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&title='+oneArticle.title+'&summary=http://img.store.naice.me/averter.jpg#_naice'" class="iconfont">&#xe624;</a>
+				<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=CTo_OTs4PDs6OUl4eCdqZmQ" class="iconfont">&#xe64d;</a>
+				<a target="_blank" :href="'http://share.v.t.qq.com/index.php?c=share&a=index&title='+oneArticle.title+'&url='+oneArticle.title+'&pic=http://img.store.naice.me/averter.jpg#_naice'" class="iconfont">&#xe601;</a>
+			</div>
 			<div class="comment-line"></div>
 			<section class="comment">
 				<!--<h3>少侠留下你的想法吧</h3>-->
@@ -32,8 +40,13 @@
   import * as types from '../store/mutation-types'
   import Gitment from 'gitment'
   import GitComent from '../config/github-comment'
-
+  // https://www.douban.com/share/service?href=&name=&image=
   export default{
+    data () {
+      return {
+        url: 'http://blog.naice.me/articles/'
+      }
+    },
     computed: {
       oneArticle () {
         return this.$store.getters.oneArticle
@@ -62,6 +75,7 @@
     beforeRouteEnter (to, from, next) {
       next(vm => {
         vm.$nextTick(() => {
+          vm.url = 'http://blog.naice.me/articles/' + to.params.id
           setTimeout(function () {
             if (typeof window !== 'undefined') {
               window.$('pre code').each(function (i, block) {
@@ -130,12 +144,12 @@
 		line-height: 1.75;
 	}
 
-	.markdown li{
+	.markdown li {
 		line-height: 1.8;
 		margin-left: 20px;
 	}
 
-	.markdown ul li{
+	.markdown ul li {
 		list-style: disc;
 	}
 
@@ -282,5 +296,27 @@
 		margin-left: 200px;
 		bottom: 40px;
 		cursor: pointer;
+	}
+
+	.shearBox {
+		margin: 20px 0;
+	}
+
+	.shearBox a {
+		display: inline-block;
+		margin-left: 10px;
+		text-decoration: none;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		border-radius: 50%;
+		background: #666;
+		color: #ffffff;
+		transition: 0.3s;
+	}
+
+	.shearBox a:hover {
+		background: #3fb76c;
 	}
 </style>

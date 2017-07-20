@@ -13,5 +13,5 @@ export const progress = ({commit}, playload) => {
 }
 
 export const currunPage = ({commit}, page) => {
-  commit('currunPage', page)
+  commit('setPage', page)
 }

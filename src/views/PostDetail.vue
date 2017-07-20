@@ -56,14 +56,19 @@
         }
       })
       this.$nextTick(() => {
-        window.hljs.initHighlightingOnLoad()
         gitment.render('commentBox')
       })
     },
     beforeRouteEnter (to, from, next) {
       next(vm => {
         vm.$nextTick(() => {
-          window.hljs.initHighlightingOnLoad()
+          setTimeout(function () {
+            if (typeof window !== 'undefined') {
+              window.$('pre code').each(function (i, block) {
+                window.hljs.highlightBlock(block)
+              })
+            }
+          }, 600)
         })
       })
     }
@@ -123,6 +128,15 @@
 		font-size: 14px;
 		text-indent: 28px;
 		line-height: 1.75;
+	}
+
+	.markdown li{
+		line-height: 1.8;
+		margin-left: 20px;
+	}
+
+	.markdown ul li{
+		list-style: disc;
 	}
 
 	.markdown h1,

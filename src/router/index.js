@@ -18,6 +18,7 @@ export default new Router({
     {
       path: '/articles',
       component: PostListView,
+      redirect: '/articles',
       children: [
         {
           path: '/',
@@ -30,6 +31,7 @@ export default new Router({
     {
       path: '/articles/:id',
       component: PostListView,
+      redirect: '/articles',
       children: [
         {
           path: '/',
@@ -42,6 +44,7 @@ export default new Router({
     {
       path: '/about',
       component: PostListView,
+      redirect: '/',
       children: [
         {
           path: '/',
@@ -54,6 +57,7 @@ export default new Router({
     {
       path: '/tag',
       component: PostListView,
+      redirect: '/articles',
       children: [
         {
           path: '/',

@@ -11,7 +11,7 @@
 				<img src="../assets/img/averter.jpg" alt="">
 			</router-link>
 			<h1>Naice &nbsp;Blog</h1>
-			<p>每一个不曾起舞的日子，都是对声明的辜负。</p>
+			<p>每一个不曾起舞的日子，都是对生命的辜负。</p>
 			<div class="aside-icon">
 				<a href="https://github.com/naihe138">
 					<i class="iconfont">&#xe621;</i>

@@ -25,9 +25,13 @@
 		</ul>
 		<p class="nothing" v-show="articels.length === 0">nothing...</p>
 		<div class="footer">
-			<span class="prev iconfont">&#xe8f4;</span>
-			<span class="next iconfont">&#xe8f5;</span>
+			<span class="prev iconfont" @click="toPrevPage">&#xe8f4;</span>
+			<p class="pageNumber">{{currunPage + 1}}</p>
+			<span class="next iconfont" @click="toNextPage">&#xe8f5;</span>
 		</div>
+		<transition name="slide-fade">
+			<div v-if="showMassage" class="toast" v-text="message"></div>
+		</transition>
 	</div>
 </template>
 
@@ -36,9 +40,8 @@
   export default{
     data () {
       return {
-        showPageBtn: true,
-        showPrev: true,
-        showNext: true
+        showMassage: false,
+        message: '没有更多了'
       }
     },
     computed: {
@@ -47,20 +50,13 @@
       },
       count () {
         let totalPage = Math.floor(this.$store.getters.count / 10)
-        console.log(totalPage)
         if (totalPage === 0) {
           this.showPageBtn = false
         }
         return totalPage
       },
       currunPage () {
-        let cPage = this.$store.getters.currunPage
-        if (cPage === 0) {
-          this.showPrev = false
-        } else if (cPage >= this.count) {
-          this.showNext = false
-        }
-        return cPage
+        return this.$store.getters.currunPage
       }
     },
     methods: {
@@ -81,20 +77,30 @@
         this.$router.push(`/articles/${id}`)
       },
       toNextPage () {
-        console.log(this.currunPage)
-        console.log(this.count)
+        const _this = this
         if (this.currunPage + 1 > this.count) {
-          alert('没有更多了')
+          this.message = '没有更多了'
+          _this.showMassage = true
+          setTimeout(() => {
+            _this.showMassage = false
+          }, 2000)
           return
         }
         this.getArticle(this.currunPage + 1)
+        this.$store.dispatch('currunPage', this.currunPage + 1)
       },
       toPrevPage () {
-        if (this.currunPage - 1 < this.count) {
-          alert('已经是第一页了')
+        const _this = this
+        if (this.currunPage - 1 < 0) {
+          this.message = '已经是第一页了'
+          _this.showMassage = true
+          setTimeout(() => {
+            _this.showMassage = false
+          }, 2000)
           return
         }
         this.getArticle(this.currunPage - 1)
+        this.$store.dispatch('currunPage', this.currunPage - 1)
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -104,6 +110,7 @@
         } else {
           vm.getArticle(0)
         }
+        vm.$store.dispatch('currunPage', 0)
       })
     }
   }
@@ -202,10 +209,11 @@
 	}
 
 	.footer {
-		display: block;
+		display: flex;
 		clear: both;
-		padding: 30px 20px 20px 0;
+		padding: 50px 20px 20px 0;
 		position: relative;
+		justify-content: space-between;
 	}
 
 	.footer span {
@@ -214,12 +222,12 @@
 		display: inline-block;
 		cursor: pointer;
 		transition: 0.3s;
-		position: absolute;
 		font-size: 24px;
 	}
 
-	.footer span.prev {
-		left: 0;
+	.footer .pageNumber {
+		font-size: 13px;
+		color: #666;
 	}
 
 	.footer span:hover {
@@ -227,12 +235,34 @@
 		color: #3fb76c;
 	}
 
-	.footer span.next {
-		right: 30px;
-	}
-	.nothing{
+	.nothing {
 		text-align: center;
 		line-height: 100px;
 		color: #666;
+	}
+
+	.toast {
+		position: fixed;
+		bottom: 10%;
+		left: 50%;
+		transform: translateX(-50%);
+		color: #fff;
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 4px;
+		font-size: 12px;
+		padding: 5px 15px;
+	}
+
+	.slide-fade-enter-active {
+		transition: all .3s ease;
+	}
+
+	.slide-fade-leave-active {
+		transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
+
+	.slide-fade-enter, .slide-fade-leave-to{
+		transform: translateY(10px);
+		opacity: 0;
 	}
 </style>

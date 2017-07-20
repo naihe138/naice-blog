@@ -24,11 +24,10 @@
 			</li>
 		</ul>
 		<p class="nothing" v-show="articels.length === 0">nothing...</p>
-		<div class="footer" v-if="showPageBtn">
-			<span class="prev" v-if="showPrev"></span>
-			<span class="next" v-if="showNext" @click="toNextPage()"></span>
+		<div class="footer">
+			<span class="prev iconfont">&#xe8f4;</span>
+			<span class="next iconfont">&#xe8f5;</span>
 		</div>
-		<span>{{currunPage}}{{count}}</span>
 	</div>
 </template>
 
@@ -213,27 +212,22 @@
 		width: 30px;
 		height: 30px;
 		display: inline-block;
-		background-size: cover;
 		cursor: pointer;
 		transition: 0.3s;
 		position: absolute;
+		font-size: 24px;
 	}
 
 	.footer span.prev {
-		background-image: url("../assets/img/prev.png");
 		left: 0;
 	}
 
-	.footer span.prev:hover {
-		transform: rotate(-45deg);
-	}
-
-	.footer span.next:hover {
-		transform: rotate(45deg);
+	.footer span:hover {
+		transform: scale(1.1);
+		color: #3fb76c;
 	}
 
 	.footer span.next {
-		background-image: url("../assets/img/next.png");
 		right: 30px;
 	}
 	.nothing{

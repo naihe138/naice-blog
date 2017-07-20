@@ -33,6 +33,7 @@
 
 <style>
 	@import url('./assets/css/normalize.css');
+	@import url('./assets/css/github-gist.css');
 	@import url('nprogress/nprogress.css');
 
 	#nprogress .bar {

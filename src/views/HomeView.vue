@@ -5,17 +5,26 @@
 		</section>
 		<div class="home-view">
 			<section class="aboutMe">
-				<h3>关于我</h3>
-				<p>“对酒当歌,人生几何。譬如朝露,去日苦多”。生命是天际划过的流星，那么短暂，而我们的青春更是如此。作为一个前端开发者。在以后的日子里，需要不断学习，不断进步，保持良好的技术热情，不断成长。做一个有道德，有理想，有纪律，有文化的四有前端开发者。</p>
+				<div class="about-nav">
+					<router-link to="/">首页</router-link>
+					<router-link to="/articles">文章</router-link>
+				</div>
+				<div class="about-nav">
+					<router-link to="/about">关于</router-link>
+					<router-link to="/">项目</router-link>
+				</div>
+				<div class="about-nav"></div>
+				<!--<h3>关于我</h3>-->
+				<!--<p>“对酒当歌,人生几何。譬如朝露,去日苦多”。生命是天际划过的流星，那么短暂，而我们的青春更是如此。作为一个前端开发者。在以后的日子里，需要不断学习，不断进步，保持良好的技术热情，不断成长。做一个有道德，有理想，有纪律，有文化的四有前端开发者。</p>-->
 			</section>
-			<div class="postBox">
-				<router-link to="/articles">
-					<p>文章</p>
-				</router-link>
-				<a href="javascript:alert('页面正在开发ing')">
-					<p>项目</p>
-				</a>
-			</div>
+			<!--<div class="postBox">-->
+				<!--<router-link to="/articles">-->
+					<!--<p>文章</p>-->
+				<!--</router-link>-->
+				<!--<a href="javascript:alert('页面正在开发ing')">-->
+					<!--<p>项目</p>-->
+				<!--</a>-->
+			<!--</div>-->
 		</div>
 	</div>
 </template>
@@ -70,11 +79,12 @@
 	}
 
 	.aboutMe {
-		width: 400px;
+		width: 280px;
 		/*border: 1px solid red;*/
-		height: 250px;
+		height: 300px;
 	}
 
+	/*
 	.aboutMe h3 {
 		color: var(--titleColor);
 		font-size: 22px;
@@ -135,5 +145,29 @@
 	}
 	.postBox a:hover p{
 		color: var(--lineColor);
+	}
+	*/
+
+	.about-nav{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 30px;
+	}
+	.about-nav a{
+		width: 100px;
+		height: 100px;
+		border: 1px solid #ccc;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 100px;
+		font-size: 18px;
+		color: #333;
+		text-decoration: none;
+		transition: background 0.3s;
+	}
+	.about-nav a:hover{
+		background: #3fb76c;
+		color: #fff;
+		border-color: #3fb76c;
 	}
 </style>

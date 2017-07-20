@@ -15,7 +15,7 @@ const config = require('./config')
 mongoose.Promise = require('bluebird')
 mongoose.connect(config.dbUrl)
 mongoose.connection.on('connected', () => {
-  console.log(`Mongoose connection open to: ${config.dbUrl}`);
+  console.log(`Mongoose connection open to: ${config.dbUrl}`)
 })
 // 引入相关模型
 require('./models/adminUser')

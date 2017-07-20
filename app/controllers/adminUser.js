@@ -59,6 +59,7 @@ const register = async (ctx, next) => {
     username,
     password: md5(config.md5Pre + password)
   }
+  console.log(opts)
   const finduser = await user.query({ username: opts.username })
   if (finduser) {
     ctx.body = {

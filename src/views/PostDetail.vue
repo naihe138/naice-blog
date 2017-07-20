@@ -56,7 +56,15 @@
         }
       })
       this.$nextTick(() => {
+        window.hljs.initHighlightingOnLoad()
         gitment.render('commentBox')
+      })
+    },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.$nextTick(() => {
+          window.hljs.initHighlightingOnLoad()
+        })
       })
     }
   }

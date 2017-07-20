@@ -15,12 +15,12 @@
 					<span></span>
 				</div>
 				<div class="postBox">
-					<router-link to="/articles">
-						<p>文章</p>
+					<router-link to="/">
+						<p><i class="iconfont">&#xe73a;</i></p>
 					</router-link>
-					<a target="_blank" href="https://github.com/naihe138?tab=repositories">
-						<p>项目</p>
-					</a>
+					<!--<a target="_blank" href="https://github.com/naihe138?tab=repositories">-->
+						<!--<p>项目</p>-->
+					<!--</a>-->
 				</div>
 			</div>
 			<transition name="articlefade" mode="out-in">
@@ -126,13 +126,12 @@
 	.headerBox .serch input:focus {
 		border-color: green;
 	}
-
 	.postBox {
 		position: absolute;
 		width: 80px;
 		height: 50px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 		font-size: 12px;
 		right: 10px;
 		top: 10px;
@@ -142,32 +141,9 @@
 		width: 30px;
 		height: 30px;
 		text-decoration: none;
-		color: #666;
+		color: #999;
 		text-align: center;
-		background-image: url('../assets/img/top-icon.png');
-		background-size: 60px 60px;
 	}
-
-	.postBox a p {
-		padding-top: 30px;
-	}
-
-	.postBox a:nth-of-type(1) {
-		background-position: -30px 0px;
-	}
-
-	.postBox a:nth-of-type(2) {
-		background-position: 0px 0px;
-	}
-
-	.postBox a:nth-of-type(1):hover {
-		background-position: -30px 30px;
-	}
-
-	.postBox a:nth-of-type(2):hover {
-		background-position: -0px -30px;
-	}
-
 	.postBox a:hover p {
 		color: var(--lineColor);
 	}

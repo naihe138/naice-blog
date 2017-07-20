@@ -425,3 +425,20 @@ td,
 th {
   padding: 0;
 }
+
+@font-face {
+  font-family: 'iconfont';  /* project id 358841 */
+  src: url('//at.alicdn.com/t/font_7zw6h9p0y6jkbj4i.eot');
+  src: url('//at.alicdn.com/t/font_7zw6h9p0y6jkbj4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_7zw6h9p0y6jkbj4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_7zw6h9p0y6jkbj4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_7zw6h9p0y6jkbj4i.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont"!important;
+  font-size: 20px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

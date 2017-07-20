@@ -17,6 +17,7 @@ module.exports = {
   ],
   globals: {
     'mui': true,
+    'window': true
   },
   // check if imports actually resolve
   // 'settings': {

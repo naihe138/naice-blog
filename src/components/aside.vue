@@ -7,14 +7,18 @@
 	<div class="aside-box">
 		<div class="marsk"></div>
 		<div class="aside-content">
-			<router-link to="/">
+			<router-link to="/articles">
 				<img src="../assets/img/averter.jpg" alt="">
 			</router-link>
 			<h1>Naice &nbsp;Blog</h1>
 			<p>每一个不曾起舞的日子，都是对声明的辜负。</p>
 			<div class="aside-icon">
-				<a href="https://github.com/naihe138"></a>
-				<a href="https://segmentfault.com/u/naice"></a>
+				<a href="https://github.com/naihe138">
+					<i class="iconfont">&#xe621;</i>
+				</a>
+				<a href="https://segmentfault.com/u/naice">
+					<i class="iconfont">&#xe610;</i>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -95,22 +99,16 @@
 		width: 34px;
 		height: 34px;
 		background-color: #5e5e5e;
-		background-size: 60px 30px;
-		background-repeat: no-repeat;
 		margin: 0 10px;
 		cursor: pointer;
 		transition: background-color 0.3s;
-		background-image: url("../assets/img/link-icon.png");
 		border-radius: 2px;
+		color: #fff;
+		text-decoration: none;
+		text-align: center;
+		line-height: 34px;
 	}
 	.aside-icon a:hover{
 		background-color: var(--lineColor);
-	}
-	.aside-icon a:nth-of-type(1){
-		background-position: -28px 2px;
-	}
-	.aside-icon a:nth-of-type(2){
-		/*background-image: url("../assets/img/segmentfault.png");*/
-		background-position: 3px 2px;
 	}
 </style>

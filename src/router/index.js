@@ -40,6 +40,18 @@ export default new Router({
       ]
     },
     {
+      path: '/about',
+      component: PostListView,
+      children: [
+        {
+          path: '/',
+          component: (resolve) => {
+            require(['@/views/About'], resolve)
+          }
+        }
+      ]
+    },
+    {
       path: '/tag',
       component: PostListView,
       children: [

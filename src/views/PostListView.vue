@@ -78,6 +78,8 @@
 		width: 380px;
 		height: 100%;
 		background: #cccccc;
+		padding: 0;
+		margin: 0;
 	}
 
 	.listBox {
@@ -117,6 +119,7 @@
 		height: 28px;
 		text-indent: 10px;
 		color: var(--fontColor);
+		background: transparent;
 	}
 
 	.headerBox .serch input:focus + span {

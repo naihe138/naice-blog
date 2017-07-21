@@ -42,6 +42,19 @@ export default new Router({
       ]
     },
     {
+      path: '/tag',
+      component: PostListView,
+      redirect: '/articles',
+      children: [
+        {
+          path: '/',
+          component: (resolve) => {
+            require(['@/views/PostList'], resolve)
+          }
+        }
+      ]
+    },
+    {
       path: '/about',
       component: PostListView,
       redirect: '/',
@@ -55,14 +68,14 @@ export default new Router({
       ]
     },
     {
-      path: '/tag',
+      path: '/project',
       component: PostListView,
-      redirect: '/articles',
+      redirect: '/',
       children: [
         {
           path: '/',
           component: (resolve) => {
-            require(['@/views/PostList'], resolve)
+            require(['@/views/Project'], resolve)
           }
         }
       ]

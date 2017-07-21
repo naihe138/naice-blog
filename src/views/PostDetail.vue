@@ -40,7 +40,6 @@
   import * as types from '../store/mutation-types'
   import Gitment from 'gitment'
   import GitComent from '../config/github-comment'
-  // https://www.douban.com/share/service?href=&name=&image=
   export default{
     data () {
       return {
@@ -183,7 +182,6 @@
 		color: #555;
 		border-radius: 3px;
 		padding: 10px;
-		max-height: 700px;
 		overflow: auto;
 		border: none;
 		font-size: 0.9em;

@@ -11,7 +11,7 @@
 				</div>
 				<div class="about-nav">
 					<router-link to="/about">关于</router-link>
-					<router-link to="/">项目</router-link>
+					<router-link to="/project">项目</router-link>
 				</div>
 				<div class="about-nav"></div>
 				<!--<h3>关于我</h3>-->

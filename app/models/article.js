@@ -33,7 +33,7 @@ class Article {
     return this.model.find(tagOpts).exec()
   }
   remove(opts) {
-    return this.model.remove(opts)
+    return this.model.remove(opts).exec()
   }
 }
 

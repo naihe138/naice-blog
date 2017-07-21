@@ -12,6 +12,7 @@ router.post('/add', articles.add)
 router.post('/edit', articles.editArticle)
 router.get('/tag', articles.getTags)
 router.get('/serch', articles.getAllArticles)
+router.post('/remove', articles.removeOneArticle)
 
 router.post('/addComment', comments.addComment)
 router.get('/getComment', comments.getComment)

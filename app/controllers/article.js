@@ -99,7 +99,6 @@ const getAllArticles = async (ctx, next) => {
       const num = item.title.search(reg)
       return num >= 0
     })
-    console.log(ret.length)
     ctx.body = {
       status: true,
       count: ret.length,
@@ -162,11 +161,30 @@ const getOneArticle = async (ctx, next) => {
   }
 }
 
+// 获取指定文章
+const removeOneArticle = async (ctx, next) => {
+  const id = ctx.request.body.id
+  const data = await article.remove({ _id: id })
+  if (data) {
+    ctx.body = {
+      status: true,
+      data
+    }
+  } else {
+    ctx.body = {
+      status: false,
+      message: '删除文章失败',
+      data
+    }
+  }
+}
+
 module.exports = {
   add,
   getArticles,
   getTags,
   getOneArticle,
   editArticle,
-  getAllArticles
+  getAllArticles,
+  removeOneArticle
 }

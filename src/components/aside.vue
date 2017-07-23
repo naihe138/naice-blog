@@ -7,9 +7,9 @@
 	<div class="aside-box">
 		<div class="marsk"></div>
 		<div class="aside-content">
-			<router-link to="/articles">
+			<a @click="toArticle" :data-page="currunPage">
 				<img src="../assets/img/averter.jpg" alt="">
-			</router-link>
+			</a>
 			<h1>Naice &nbsp;Blog</h1>
 			<p>每一个不曾起舞的日子，都是对生命的辜负。</p>
 			<div class="aside-icon">
@@ -25,11 +25,22 @@
 </template>
 
 <script>
-  export default{}
+  export default{
+    computed: {
+      currunPage () {
+        return this.$store.getters.currunPage
+      }
+    },
+    methods: {
+      toArticle () {
+        this.$router.push('/articles?page=' + this.currunPage)
+      }
+    }
+  }
 </script>
 
 <style scoped>
-	:root{
+	:root {
 		--fontColor: #5e5e5e; /*文字颜色*/
 		--titleColor: #3e3e3e; /*标题颜色*/
 		--lineColor: #3fb76c; /*线条绿色*/
@@ -44,12 +55,14 @@
 		align-items: center;
 		background: url("../assets/img/aside-bg.jpg") no-repeat center center;
 	}
-	.marsk{
+
+	.marsk {
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: rgba(255,255,255,0.5);
+		background: rgba(255, 255, 255, 0.5);
 	}
+
 	.aside-content {
 		width: 300px;
 		height: 400px;
@@ -58,6 +71,7 @@
 		position: relative;
 		z-index: 2;
 	}
+
 	.aside-content img {
 		width: 100px;
 		height: 100px;
@@ -65,7 +79,7 @@
 		transition: transform 0.5s;
 	}
 
-	.aside-content img:hover{
+	.aside-content img:hover {
 		transform: rotate(360deg);
 	}
 
@@ -84,18 +98,21 @@
 		background: var(--lineColor);
 		margin-top: 15px;
 	}
-	.aside-content p{
+
+	.aside-content p {
 		font-size: 12px;
 		padding-top: 10px;
 		padding-bottom: 20px;
 		color: var(--fontColor);
 	}
-	.aside-icon{
+
+	.aside-icon {
 		clear: both;
 		display: flex;
 		justify-content: center;
 	}
-	.aside-icon a{
+
+	.aside-icon a {
 		width: 34px;
 		height: 34px;
 		background-color: #5e5e5e;
@@ -108,7 +125,8 @@
 		text-align: center;
 		line-height: 34px;
 	}
-	.aside-icon a:hover{
+
+	.aside-icon a:hover {
 		background-color: var(--lineColor);
 	}
 </style>

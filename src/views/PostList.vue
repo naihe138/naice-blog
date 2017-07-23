@@ -87,6 +87,8 @@
           return
         }
         this.getArticle(this.currunPage + 1)
+        this.$router.push('/articles?page=' + (
+                          Number(this.currunPage) + 1))
         this.$store.dispatch('currunPage', this.currunPage + 1)
       },
       toPrevPage () {
@@ -107,10 +109,12 @@
       next(vm => {
         if (/tag/.test(to.path)) {
           vm.getTags(to.query.tags)
+          vm.$store.dispatch('currunPage', 0)
         } else {
-          vm.getArticle(0)
+          let page = Number(to.query.page) || 0
+          vm.getArticle(page)
+          vm.$store.dispatch('currunPage', page)
         }
-        vm.$store.dispatch('currunPage', 0)
       })
     }
   }
@@ -261,7 +265,7 @@
 		transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 	}
 
-	.slide-fade-enter, .slide-fade-leave-to{
+	.slide-fade-enter, .slide-fade-leave-to {
 		transform: translateY(10px);
 		opacity: 0;
 	}

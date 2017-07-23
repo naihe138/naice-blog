@@ -7,7 +7,7 @@
 			<section class="aboutMe">
 				<div class="about-nav">
 					<router-link to="/">首页</router-link>
-					<router-link to="/articles">文章</router-link>
+					<router-link to="/articles?page=0">文章</router-link>
 				</div>
 				<div class="about-nav">
 					<router-link to="/about">关于</router-link>

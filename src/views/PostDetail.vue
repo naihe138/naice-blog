@@ -139,13 +139,16 @@
 
 	.markdown p {
 		font-size: 14px;
-		text-indent: 28px;
 		line-height: 1.75;
 	}
 
 	.markdown li {
 		line-height: 1.8;
 		margin-left: 20px;
+	}
+
+	.markdown ol li{
+		list-style: decimal;
 	}
 
 	.markdown ul li {

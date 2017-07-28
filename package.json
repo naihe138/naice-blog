@@ -16,6 +16,7 @@
     "npm": ">=4.1"
   },
   "dependencies": {
+    "busboy": "^0.2.14",
     "es6-promise": "^4.1.0",
     "gitment": "^0.0.3",
     "koa": "^2.2.0",
@@ -26,6 +27,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
     "lru-cache": "^4.1.1",
+    "qiniu": "^7.0.5",
     "sass-loader": "^6.0.6",
     "vue": "^2.3.4",
     "vue-router": "^2.6.0",

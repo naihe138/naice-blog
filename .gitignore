@@ -9,3 +9,5 @@ test/e2e/reports
 selenium-debug.log
 .idea/
 src/config/github-comment.js
+
+app/config/qiniuconfig.js

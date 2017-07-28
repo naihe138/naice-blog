@@ -170,9 +170,9 @@
 	}
 
 	.list li .conten {
-		font-size: 14px;
+		font-size: 16px;
 		color: var(--fontColor);
-		line-height: 1.8;
+		line-height: 2;
 	}
 
 	.list li .tag {

@@ -138,12 +138,12 @@
 	}
 
 	.markdown p {
-		font-size: 14px;
-		line-height: 1.75;
+		font-size: 16px;
+		line-height: 2;
 	}
 
 	.markdown li {
-		line-height: 1.8;
+		line-height: 2;
 		margin-left: 20px;
 	}
 

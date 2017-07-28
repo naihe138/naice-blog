@@ -11,6 +11,7 @@ const bodyParser = require('koa-bodyparser')
 const router = require('koa-router')()
 const mongoose = require('mongoose')
 const cors = require('koa-cors')
+// mongodb连接
 const config = require('./config')
 mongoose.Promise = require('bluebird')
 mongoose.connect(config.dbUrl)
@@ -19,11 +20,15 @@ mongoose.connection.on('connected', () => {
 })
 // 引入相关模型
 require('./models/adminUser')
+require('./models/article')
+require('./models/comment')
+require('./models/project')
 // 引入路由
 const isAdmin = require('./config/isAdmin')
 const adminUserRouter = require('./router/adminUser')
 const articleRouter = require('./router/article')
 const fArticleRouter = require('./router/fArticle')
+const uploadFile = require('./router/upload')
 // 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -161,7 +166,7 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 // routes definition
 router.use('/api/backstage/user', isAdmin, adminUserRouter.routes())
 router.use('/api/backstage/article', isAdmin, articleRouter.routes())
-
+router.use('/api/backstage/upload', uploadFile.routes())
 // 前端调试
 router.use('/api/front/article', fArticleRouter.routes())
 // 把路由绑定到 koa 中

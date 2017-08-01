@@ -12,6 +12,7 @@ const projectSchema = new mongoose.Schema({
   },
   describe: String,
   hrefStr: String,
+  imageUrl: String,
   meta: {
     createAt: {
       type: Date,

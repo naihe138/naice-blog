@@ -6,26 +6,32 @@
 const ProjectModel = require('../schemas/project')
 
 class Project {
-  constructor() {
+  constructor () {
     this.model = ProjectModel
   }
+
   save (opts) {
     this.entity = new ProjectModel(opts)
     return this.entity.save()
   }
+
   queryOne (opts) {
     return this.model.findOne(opts).exec()
   }
-  queryCount(opts) {
+
+  queryCount (opts) {
     return this.model.count(opts)
   }
-  queryAll() {
+
+  queryAll () {
     return this.model.find({}).exec()
   }
-  updated(id, opts) {
-    return this.model.update({ _id: id }, { $set: opts}).exec();
+
+  updated (id, opts) {
+    return this.model.update({_id: id}, {$set: opts}).exec()
   }
-  remove(opts) {
+
+  remove (opts) {
     return this.model.remove(opts).exec()
   }
 }

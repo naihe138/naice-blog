@@ -10,9 +10,82 @@ const project = new Project()
 // 添加项目
 const add = async (ctx, next) => {
   let opts = ctx.request.body
-  console.log(opts)
+  const newProject = await project.save(opts)
+  if (newProject) {
+    ctx.body = {
+      state: true,
+      massage: '保存项目成功'
+    }
+  } else {
+    ctx.body = {
+      state: false,
+      massage: '保存项目失败'
+    }
+  }
+}
+
+// 查找所有项目
+const findProjects = async (ctx, next) => {
+  const newProject = await project.queryAll({})
+  if (newProject) {
+    ctx.body = {
+      state: true,
+      projectList: newProject
+    }
+  } else {
+    ctx.body = {
+      state: false,
+      err: newProject,
+      massage: '查找项目出错，请检查服务器'
+    }
+  }
+}
+
+// 修改项目
+const editProject = async (ctx, next) => {
+  let opts = ctx.request.body
+  let updateObj = {}
+  for (let key in opts) {
+    if (key !== 'id' || !opts[key]) {
+      updateObj[key] = opts[key]
+    }
+  }
+  const isUpdate = await project.updated(opts.id, updateObj)
+  if (isUpdate.ok) {
+    ctx.body = {
+      state: true,
+      massage: '修改成功'
+    }
+  } else {
+    ctx.body = {
+      state: false,
+      err: isUpdate,
+      massage: '修改失败，你的参数'
+    }
+  }
+}
+
+// 删除项目
+const remove = async (ctx, next) => {
+  let opts = ctx.request.body
+  const isRemove = await project.remove({_id: opts.id})
+  if (isRemove.result.ok) {
+    ctx.body = {
+      state: true,
+      massage: '删除项目成功'
+    }
+  } else {
+    ctx.body = {
+      state: false,
+      err: isRemove,
+      massage: '删除项目失败'
+    }
+  }
 }
 
 module.exports = {
-  add
+  add,
+  findProjects,
+  editProject,
+  remove
 }

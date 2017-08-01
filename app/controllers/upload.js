@@ -86,7 +86,6 @@ function uploadFile (ctx, options) {
   if (!confirm) {
     return
   }
-  console.log('start uploading...')
   return new Promise((resolve, reject) => {
     _emmiter.on('file', function (fieldname, file, filename, encoding, mimetype) {
       const fileName = Rename(filename)
@@ -101,11 +100,11 @@ function uploadFile (ctx, options) {
     })
 
     _emmiter.on('finish', function () {
-      console.log('finished...')
+      // console.log('finished...')
     })
 
     _emmiter.on('error', function (err) {
-      console.log('err...')
+      // console.log('err...')
       reject(err)
     })
 

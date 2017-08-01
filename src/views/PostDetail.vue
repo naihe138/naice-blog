@@ -12,6 +12,7 @@
 			</div>
 			<!--<p class="date">{{oneArticle.meta ? oneArticle.meta.updateAt.substring(0, 10) : ''}}</p>-->
 			<div class="markdown" v-html="oneArticle.contentStr"></div>
+
 			<div class="shearBox">
 				<a target="_blank" :href="'http://connect.qq.com/widget/shareqq/index.html?url='+url+'&title='+oneArticle.title+'&source=http://img.store.naice.me/averter.jpg#_naice'"  class="iconfont">&#xe602;</a>
 				<a target="_blank" :href="'http://service.weibo.com/share/share.php?url='+url+'&title='+oneArticle.title+'&pic=http://img.store.naice.me/averter.jpg#_naice'" class="iconfont">&#xe832;</a>

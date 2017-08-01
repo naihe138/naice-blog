@@ -10,5 +10,7 @@ export default {
   getArticles: bastUrl + '/article',
   serchArticles: bastUrl + '/article/serch',
   // 标签
-  tag: bastUrl + '/article/tag'
+  tag: bastUrl + '/article/tag',
+  // 获取文章列表
+  getProject: bastUrl + '/project'
 }

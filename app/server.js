@@ -27,9 +27,11 @@ require('./models/project')
 const isAdmin = require('./config/isAdmin')
 const adminUserRouter = require('./router/adminUser')
 const articleRouter = require('./router/article')
-const fArticleRouter = require('./router/fArticle')
 const uploadFile = require('./router/upload')
 const projects = require('./router/project')
+
+const fArticleRouter = require('./router/fArticle')
+const fProjectRouter = require('./router/fProject')
 // 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -168,9 +170,10 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 router.use('/api/backstage/user', isAdmin, adminUserRouter.routes())
 router.use('/api/backstage/article', isAdmin, articleRouter.routes())
 router.use('/api/backstage/upload', uploadFile.routes())
-router.use('/api/backstage/project', projects.routes())
+router.use('/api/backstage/project', isAdmin, projects.routes())
 // 前端调试
 router.use('/api/front/article', fArticleRouter.routes())
+router.use('/api/front/project', fProjectRouter.routes())
 // 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 

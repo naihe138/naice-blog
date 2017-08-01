@@ -6,6 +6,7 @@ import * as actions from './actions'
 import addArr from './modules/count'
 // articel
 import articles from './modules/articles'
+import projects from './modules/project'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -25,6 +26,7 @@ export default new Vuex.Store({
   },
   modules: {
     addArr,
-    articles
+    articles,
+    projects
   }
 })

@@ -7,108 +7,20 @@
 	<div id="">
 		<div class="container">
 			<div class="grid">
-				<figure class="effect-lily">
-					<img src="../assets/img/2.jpg"/>
+				<!--<figure class="effect-lily">-->
+					<!--<img src="../assets/img/2.jpg"/>-->
+					<!--<figcaption>-->
+						<!--<h2>Nice <span>Lily</span></h2>-->
+						<!--<p>Lily likes to play with crayons and pencils</p>-->
+						<!--<a href="http://gitblog.naice.me/aboutMe/index.html" target="_blank">View more</a>-->
+					<!--</figcaption>-->
+				<!--</figure>-->
+				<figure v-for="item in list" :class="item.effect">
+					<img width="100%" :src="item.imageUrl"/>
 					<figcaption>
-						<h2>Nice <span>Lily</span></h2>
-						<p>Lily likes to play with crayons and pencils</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-sadie">
-					<img src="../assets/img/2.jpg" alt="img02"/>
-					<figcaption>
-						<h2>Holy <span>Sadie</span></h2>
-						<p>Sadie never took her eyes off me. <br>She had a dark soul.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-layla">
-					<img src="../assets/img/2.jpg" alt="img04"/>
-					<figcaption>
-						<h2>Crazy <span>Layla</span></h2>
-						<p>When Layla appears, she brings an eternal summer along.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-oscar">
-					<img src="../assets/img/2.jpg" alt="img08"/>
-					<figcaption>
-						<h2>Warm <span>Oscar</span></h2>
-						<p>Oscar is a decent man. He used to clean porches with pleasure.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-marley">
-					<img src="../assets/img/2.jpg" alt="img09"/>
-					<figcaption>
-						<h2>Sweet <span>Marley</span></h2>
-						<p>Marley tried to convince her but she was not interested.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-ruby">
-					<img src="../assets/img/2.jpg" alt="img10"/>
-					<figcaption>
-						<h2>Glowing <span>Ruby</span></h2>
-						<p>Ruby did not need any help. Everybody knew that.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-roxy">
-					<img src="../assets/img/2.jpg" alt="img03"/>
-					<figcaption>
-						<h2>Charming <span>Roxy</span></h2>
-						<p>Roxy was my best friend. She'd cross any border for me.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-bubba">
-					<img src="../assets/img/2.jpg" alt="img06"/>
-					<figcaption>
-						<h2>Fresh <span>Bubba</span></h2>
-						<p>Bubba likes to appear out of thin air.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-romeo">
-					<img src="../assets/img/2.jpg" alt="img05"/>
-					<figcaption>
-						<h2>Wild <span>Romeo</span></h2>
-						<p>Romeo never knows what he wants. He seemed to be very cross about something.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-dexter">
-					<img src="../assets/img/2.jpg" alt="img12"/>
-					<figcaption>
-						<h2>Strange <span>Dexter</span></h2>
-						<p>Dexter had his own strange way. You could watch him training ants.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-sarah">
-					<img src="../assets/img/2.jpg" alt="img13"/>
-					<figcaption>
-						<h2>Free <span>Sarah</span></h2>
-						<p>Sarah likes to watch clouds. She's quite depressed.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-chico">
-					<img src="../assets/img/2.jpg" alt="img15"/>
-					<figcaption>
-						<h2>Silly <span>Chico</span></h2>
-						<p>Chico's main fear was missing the morning bus.</p>
-						<a href="/" target="_blank">View more</a>
-					</figcaption>
-				</figure>
-				<figure class="effect-milo">
-					<img src="../assets/img/2.jpg" alt="img11"/>
-					<figcaption>
-						<h2>Demo <span>demo</span></h2>
-						<p>Milo went to the woods. He took a fun ride and never came back.</p>
-						<a href="/" target="_blank">View more</a>
+						<h2>{{item.title}}</h2>
+						<p>{{item.describe}}</p>
+						<a :href="item.hrefStr" target="_blank">View more</a>
 					</figcaption>
 				</figure>
 			</div>
@@ -117,21 +29,30 @@
 </template>
 
 <script>
+  import * as types from '../store/mutation-types'
   export default{
+    computed: {
+      list () {
+        return this.$store.getters.project
+      }
+    },
     mounted () {
-      this.$store.dispatch('progress', 100)
+      this.$store.dispatch(types.GET_PROJECT)
+      // this.$store.dispatch('progress', 100)
     }
   }
 </script>
 
 <style scoped>
 	@import url('../assets/css/component.css');
-	.container{
+
+	.container {
 		width: 100%;
 		box-sizing: border-box;
 		padding-right: 30px;
 		overflow: hidden;
 	}
+
 	*, *:after, *:before {
 		box-sizing: border-box;
 	}

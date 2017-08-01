@@ -10,4 +10,6 @@ router.get('/', projects.findProjects)
 router.post('/add', projects.add)
 router.post('/edit', projects.editProject)
 router.post('/remove', projects.remove)
+router.post('/findone', projects.findProjectsById)
+
 module.exports = router

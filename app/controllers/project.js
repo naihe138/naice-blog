@@ -3,7 +3,6 @@
  * @author 何文林
  * @date 2017/7/4
  */
-const querystring = require('querystring')
 const Project = require('../models/project')
 const project = new Project()
 
@@ -27,10 +26,30 @@ const add = async (ctx, next) => {
 // 查找所有项目
 const findProjects = async (ctx, next) => {
   const newProject = await project.queryAll({})
+  const projectCount = await project.queryCount({})
   if (newProject) {
     ctx.body = {
       state: true,
-      projectList: newProject
+      count: projectCount,
+      list: newProject
+    }
+  } else {
+    ctx.body = {
+      state: false,
+      err: newProject,
+      massage: '查找项目出错，请检查服务器'
+    }
+  }
+}
+
+// 查找指定id项目
+const findProjectsById = async (ctx, next) => {
+  let opts = ctx.request.body
+  const newProject = await project.queryOne({_id: opts.id})
+  if (newProject) {
+    ctx.body = {
+      state: true,
+      data: newProject
     }
   } else {
     ctx.body = {
@@ -44,13 +63,16 @@ const findProjects = async (ctx, next) => {
 // 修改项目
 const editProject = async (ctx, next) => {
   let opts = ctx.request.body
+  console.log(opts)
   let updateObj = {}
   for (let key in opts) {
-    if (key !== 'id' || !opts[key]) {
+    if (key !== 'id' && opts[key]) {
       updateObj[key] = opts[key]
     }
   }
+  console.log(updateObj)
   const isUpdate = await project.updated(opts.id, updateObj)
+  console.log(isUpdate)
   if (isUpdate.ok) {
     ctx.body = {
       state: true,
@@ -87,5 +109,6 @@ module.exports = {
   add,
   findProjects,
   editProject,
-  remove
+  remove,
+  findProjectsById
 }

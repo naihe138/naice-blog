@@ -8,6 +8,10 @@ const mongoose = require('mongoose')
 const adminUserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  role: {
+    type: Number,
+    default: 50
+  },
   meta: {
     createAt: {
       type: Date,

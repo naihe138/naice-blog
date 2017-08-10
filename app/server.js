@@ -24,7 +24,6 @@ require('./models/article')
 require('./models/comment')
 require('./models/project')
 // 引入路由
-const isAdmin = require('./config/isAdmin')
 const adminUserRouter = require('./router/adminUser')
 const articleRouter = require('./router/article')
 const uploadFile = require('./router/upload')
@@ -54,8 +53,8 @@ app.use(bodyParser())
 app.use(json())
 app.use(logger())
 app.use(cors({
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Credentials': true
+  'origin': 'http://localhost:3000',
+  'credentials': true
 }))
 
 // 静态资源缓存函数
@@ -167,10 +166,10 @@ router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
 })
 // 后台登录认证
 // routes definition
-router.use('/api/backstage/user', isAdmin, adminUserRouter.routes())
-router.use('/api/backstage/article', isAdmin, articleRouter.routes())
+router.use('/api/backstage/user', adminUserRouter.routes())
+router.use('/api/backstage/article', articleRouter.routes())
 router.use('/api/backstage/upload', uploadFile.routes())
-router.use('/api/backstage/project', isAdmin, projects.routes())
+router.use('/api/backstage/project', projects.routes())
 // 前端调试
 router.use('/api/front/article', fArticleRouter.routes())
 router.use('/api/front/project', fProjectRouter.routes())

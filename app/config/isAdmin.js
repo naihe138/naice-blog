@@ -31,13 +31,18 @@ module.exports = async (ctx, next) => {
   }
   const token = ctx.cookies.get('b_user')
   const username = ctx.cookies.get('b_username')
+  const role = ctx.cookies.get('b_role')
+  console.log(role)
   if (token) {
     const isA = await verify(token, username)
-    if (isA && isA.username) {
+    if (isA && isA.username && role == 1) {
       return next()
+    } else if (isA && isA.username && role == 50) {
+      ctx.body = {
+        code: -500,
+        message: '你并没有权限修改哦~~请联系管理员'
+      }
     } else {
-      ctx.cookies.set('b_user', '', { maxAge: 0 })
-      ctx.cookies.set('b_username', '', { maxAge: 0 })
       ctx.body = {
         code: -500,
         message: '登录验证失败'

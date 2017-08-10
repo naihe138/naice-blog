@@ -15,7 +15,7 @@ const login = async (ctx, next) => {
   if (!username || !password) {
     ctx.body = {
       message: '用户名或者密码为空！',
-      status: false,
+      status: false
     }
     return
   }
@@ -27,10 +27,12 @@ const login = async (ctx, next) => {
   if (finduser) {
     const token = jwt.sign({
       username: opts.username,
+      role: opts.role || '',
       exp: Math.floor(Date.now() / 1000) + (60 * 60)
     }, 'naice')
     ctx.cookies.set('b_user', token, { maxAge: 2592000000 })
     ctx.cookies.set('b_username', opts.username, { maxAge: 2592000000 })
+    ctx.cookies.set('b_role', finduser.role, { maxAge: 2592000000 })
     ctx.body = {
       message: '登陆成功！',
       user: finduser,
@@ -51,7 +53,7 @@ const register = async (ctx, next) => {
   if (!username || !password) {
     ctx.body = {
       message: '用户名或者密码为空！',
-      status: false,
+      status: false
     }
     return
   }

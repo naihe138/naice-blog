@@ -14,7 +14,7 @@ class adminUser {
     return this.entity.save()
   }
   query(opts) {
-    return this.model.findOne(opts, 'username _id meta').exec()
+    return this.model.findOne(opts, 'username _id meta role').exec()
   }
   queryAll() {
     return this.model.find({}).exec()

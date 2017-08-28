@@ -138,7 +138,7 @@
 	}
 
 	.list li {
-		border-bottom: 1px solid #e4e4e4;
+		border-bottom: 1px dashed #e4e4e4;
 		margin-bottom: 10px;
 	}
 
@@ -150,6 +150,7 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 10px 0 16px 0;
+		position: relative;
 	}
 
 	.list li .top h2 {
@@ -173,6 +174,7 @@
 		font-size: 16px;
 		color: var(--fontColor);
 		line-height: 2;
+		padding: 8px 0;
 	}
 
 	.list li .tag {

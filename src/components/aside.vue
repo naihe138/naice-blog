@@ -10,7 +10,7 @@
 			<a @click="toArticle" :data-page="currunPage">
 				<img src="../assets/img/averter.jpg" alt="">
 			</a>
-			<h1>Naice &nbsp;Blog</h1>
+			<h1><router-link to="/articles?page=0">Naice</router-link></h1>
 			<p>每一个不曾起舞的日子，都是对生命的辜负。</p>
 			<div class="aside-icon">
 				<a href="https://github.com/naihe138">
@@ -87,6 +87,12 @@
 		color: var(--titleColor);
 		font-size: 22px;
 		padding-top: 16px;
+	}
+
+	.aside-content h1 a{
+		color: var(--titleColor);
+		font-size: 22px;
+		text-decoration: none;
 	}
 
 	.aside-content h1:after {

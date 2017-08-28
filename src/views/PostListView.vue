@@ -9,24 +9,26 @@
 			<a-side></a-side>
 		</section>
 		<section class="listBox">
-			<div class="headerBox">
-				<div class="serch">
-					<input v-model="title" @keyup.enter="serch" type="text" placeholder="serch...">
-					<span></span>
-				</div>
-				<div class="postBox">
-					<router-link to="/">
-						<p><i class="iconfont">&#xe73a;</i></p>
-					</router-link>
-					<!--<a target="_blank" href="https://github.com/naihe138?tab=repositories">-->
+			<div class="listWrap">
+				<div class="headerBox">
+					<div class="serch">
+						<input v-model="title" @keyup.enter="serch" type="text" placeholder="serch...">
+						<span></span>
+					</div>
+					<div class="postBox">
+						<router-link to="/">
+							<p><i class="iconfont">&#xe73a;</i></p>
+						</router-link>
+						<!--<a target="_blank" href="https://github.com/naihe138?tab=repositories">-->
 						<!--<p>项目</p>-->
-					<!--</a>-->
+						<!--</a>-->
+					</div>
 				</div>
+				<transition name="articlefade" mode="out-in">
+					<router-view></router-view>
+				</transition>
+				<copy-right></copy-right>
 			</div>
-			<transition name="articlefade" mode="out-in">
-				<router-view></router-view>
-			</transition>
-			<copy-right></copy-right>
 		</section>
 	</div>
 </template>
@@ -86,8 +88,15 @@
 		flex: 1;
 		position: relative;
 		box-sizing: border-box;
-		padding-left: 30px;
-		overflow: auto;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		background: #f5f5f5;
+	}
+
+	.listWrap{
+		background: #fff;
+		padding: 20px;
 	}
 
 	.headerBox {

@@ -9,7 +9,15 @@ Vue.use(Router)
 /* eslint-disable import/no-dynamic-require */
 export default new Router({
   mode: 'history',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: (e) => {
+    if (window) {
+      const listBox = document.querySelector('.listBox')
+      if (listBox) {
+        listBox.scrollTop = 0
+      }
+    }
+    return ({ y: 0 })
+  },
   routes: [
     {
       path: '/',

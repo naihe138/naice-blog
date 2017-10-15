@@ -100,14 +100,17 @@
 
 	#detail .title {
 		text-align: center;
+		padding: 10px 0
 	}
 
 	#detail .date {
 		text-align: center;
 		font-size: 12px;
-		line-height: 20px;
+		line-height: 24px;
 	}
-
+	#detail .top {
+		padding: 30px 20px
+	}
 	#detail .tags {
 		text-align: center;
 		clear: both;

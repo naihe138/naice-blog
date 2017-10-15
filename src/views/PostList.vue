@@ -134,16 +134,15 @@
 	.list {
 		width: 100%;
 		box-sizing: border-box;
-		padding-right: 20px;
 	}
 
 	.list li {
 		border-bottom: 1px dashed #e4e4e4;
-		margin-bottom: 10px;
+		padding: 10px 25px;
+		transition: box-shadow 0.3s;
 	}
-
-	.list li:last-child {
-		border: none;
+	.list li:hover{
+		box-shadow: 0 0 5px #3fb76c
 	}
 
 	.list li .top {
@@ -217,7 +216,7 @@
 	.footer {
 		display: flex;
 		clear: both;
-		padding: 50px 20px 20px 0;
+		padding: 50px 20px;
 		position: relative;
 		justify-content: space-between;
 	}

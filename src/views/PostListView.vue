@@ -6,7 +6,14 @@
 <template>
 	<div id="postListView">
 		<section class="aside">
-			<a-side></a-side>
+			<a-side>
+				<div class="nav">
+					<router-link class="btn-8" to="/">首&nbsp;&nbsp;&nbsp;页</router-link>
+					<router-link class="btn-8" :to="'/articles?page=' + currunPage">文&nbsp;&nbsp;&nbsp;章</router-link>
+					<router-link class="btn-8" to="/project">项&nbsp;&nbsp;&nbsp;目</router-link>
+					<router-link class="btn-8" to="/about">关&nbsp;&nbsp;&nbsp;于</router-link>
+				</div>
+			</a-side>
 		</section>
 		<section class="listBox">
 			<div class="listWrap">
@@ -27,8 +34,8 @@
 				<transition name="articlefade" mode="out-in">
 					<router-view></router-view>
 				</transition>
-				<copy-right></copy-right>
 			</div>
+			<copy-right></copy-right>
 		</section>
 	</div>
 </template>
@@ -96,13 +103,15 @@
 
 	.listWrap{
 		background: #fff;
-		padding: 20px;
+		padding: 20px 0;
 	}
 
 	.headerBox {
 		height: 70px;
 		position: relative;
 		overflow: hidden;
+		border-bottom: 1px solid #f5f5f5;
+		padding: 0 20px;
 	}
 
 	.headerBox .serch {
@@ -159,4 +168,53 @@
 	.postBox a:hover p {
 		color: var(--lineColor);
 	}
+	.nav{
+		margin-bottom: 30px
+	}
+	.nav a{
+		width: 100px;
+		margin: 5px auto;
+		display: block;
+		text-decoration: none;
+		line-height: 1.8;
+		color: #fff;
+		background: rgba(0,0,0, 0.2);
+		font-size: 16px;
+		cursor: pointer;
+		position: relative;
+		border-radius: 2px;
+	}
+	/* btn-8 */
+.btn-8{
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-8:before, .btn-8:after{
+  content: "";
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 0;
+  top: 0;
+  background-color: #3fb76c;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+}
+
+.btn-8:before{
+  left: -30px;
+  transform: skew(-45deg, 0);
+}
+.btn-8:after{
+  right: -30px;
+  transform: skew(-45deg, 0);
+}
+.btn-8:hover{
+  color: #fff !important;
+}
+
+.btn-8:hover:before, .btn-8:hover:after{
+  width: 85%;
+}
 </style>

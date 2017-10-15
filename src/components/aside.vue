@@ -10,8 +10,11 @@
 			<a @click="toArticle" :data-page="currunPage">
 				<img src="../assets/img/averter.jpg" alt="">
 			</a>
-			<h1><router-link to="/articles?page=0">Naice</router-link></h1>
-			<p>每一个不曾起舞的日子，都是对生命的辜负。</p>
+			<h1>
+				<router-link to="/articles?page=0">Naice</router-link>
+				<p>每一个不曾起舞的日子，都是对生命的辜负。</p>
+			</h1>
+			<slot></slot>
 			<div class="aside-icon">
 				<a href="https://github.com/naihe138">
 					<i class="iconfont">&#xe621;</i>
@@ -48,12 +51,13 @@
 
 	.aside-box {
 		/*width: 100%;*/
+		overflow: hidden;
 		height: 100%;
-		background: rgba(255, 255, 255, 0.7);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background: url("../assets/img/aside-bg.jpg") no-repeat center center;
+		background: rgba(255, 255, 255, 0.7) url("../assets/img/aside-bg.jpg") no-repeat center center;
+		background-size: auto 100%;
 	}
 
 	.marsk {
@@ -87,6 +91,7 @@
 		color: var(--titleColor);
 		font-size: 22px;
 		padding-top: 16px;
+		padding-bottom: 30px;
 	}
 
 	.aside-content h1 a{

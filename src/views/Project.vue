@@ -49,7 +49,7 @@
 	.container {
 		width: 100%;
 		box-sizing: border-box;
-		padding-right: 30px;
+		padding: 20px;
 		overflow: hidden;
 	}
 

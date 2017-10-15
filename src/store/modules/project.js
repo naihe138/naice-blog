@@ -25,7 +25,7 @@ const actions = {
     let project = await axios.get(server.getProject, prams)
     if (project) {
       for (var i = 0; i < project.list.length; i++) {
-        let mun = Math.ceil(Math.random() * state.effectClass.length)
+        let mun = Math.floor(Math.random() * state.effectClass.length)
         project.list[i].effect = state.effectClass[mun]
       }
       commit(types.GET_PROJECT, project.list)

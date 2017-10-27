@@ -46,19 +46,14 @@
   </section>
 </template>
 <script>
-  import Aside from '../components/aside'
-  export default {
-    layout: 'content',
-    transition: 'articlefade',
-    head () {
-      return {
-        title: 'about naice'
-      }
-    },
-    components: {
-      'a-side': Aside
-    }
+export default {
+  title () {
+    return 'about naice'
+  },
+  mounted () {
+    this.$store.dispatch('progress', 100)
   }
+}
 </script>
 <style scoped>
 #about{

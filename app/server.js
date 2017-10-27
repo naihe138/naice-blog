@@ -160,6 +160,7 @@ function render(ctx, next) {
           .on('end', handleStreamEnd)
           .pipe(ctx.body)
 }
+
 // 如果不是 api 的路由的直接跳 next
 router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
   readyPromise.then(() => render(ctx, next))

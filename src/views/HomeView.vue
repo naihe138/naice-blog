@@ -34,7 +34,7 @@
 
   export default {
     title () {
-      return 'Naice Blog'
+      return 'Naice'
     },
     components: {
       'a-side': Aside

@@ -48,7 +48,12 @@ import * as type from '../store/mutation-types'
 export default {
   data () {
     return {
-      title: ''
+      title: 'naice blog'
+    }
+  },
+  computed: {
+    currunPage () {
+      return this.$store.getters.currunPage
     }
   },
   components: {

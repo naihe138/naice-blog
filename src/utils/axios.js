@@ -7,7 +7,7 @@ axios.interceptors.request.use(config => {
   return Promise.reject(error)
 })
 
-function checkStatus (response) {
+function checkStatus(response) {
   store.dispatch('progress', 100)
   if (response.status === 200 || response.status === 304) {
     return response
@@ -22,7 +22,7 @@ function checkStatus (response) {
 }
 
 export default {
-  post (url, data) {
+  post(url, data) {
     return axios({
       method: 'post',
       url,
@@ -38,7 +38,7 @@ export default {
       return err
     })
   },
-  get (url, params) {
+  get(url, params) {
     return axios({
       method: 'get',
       url,

@@ -43,7 +43,7 @@ import Gitment from 'gitment'
 import GitComent from '../config/github-comment'
 export default{
   title () {
-    return this.$store.getters.oneArticle.title
+    return this.$store.getters.oneArticle.title || 'naice blog'
   },
   data () {
     return {

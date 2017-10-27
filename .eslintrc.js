@@ -32,6 +32,7 @@ module.exports = {
     'arrow-parens': 0,
     'generator-star-spacing': 0,
     'semi': [2, 'never'],
+    'space-before-function-paren': 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 }

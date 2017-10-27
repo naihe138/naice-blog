@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as getters from './getters'
 import * as actions from './actions'
-// test
-import addArr from './modules/count'
 // articel
 import articles from './modules/articles'
 import projects from './modules/project'
@@ -17,15 +15,14 @@ export default new Vuex.Store({
   getters,
   actions,
   mutations: {
-    progress (state, payload) {
+    progress(state, payload) {
       state.progress = payload
     },
-    setPage (state, page) {
+    setPage(state, page) {
       state.currunPage = page
     }
   },
   modules: {
-    addArr,
     articles,
     projects
   }

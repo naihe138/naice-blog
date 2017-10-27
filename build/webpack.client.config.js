@@ -18,29 +18,25 @@ const webpackClientConfig = merge(base, {
     })
   },
   // cheap-module-eval-source-map is faster for development
-  devtool: isProd
-    ? (config.build.productionSourceMap ? '#source-map' : false)
-    : '#cheap-module-eval-source-map',
+  devtool: isProd ?
+    (config.build.productionSourceMap ? '#source-map' : false) : '#cheap-module-eval-source-map',
   output: {
     path: config.build.assetsRoot,
-    filename: isProd
-      ? utils.assetsPath('js/[name].[chunkhash].js')
-      : '[name].js',
-    chunkFilename: isProd
-      ? utils.assetsPath('js/[id].[chunkhash].js')
-      : '[id].js'
+    filename: isProd ?
+      utils.assetsPath('js/[name].[chunkhash].js') : '[name].js',
+    chunkFilename: isProd ?
+      utils.assetsPath('js/[id].[chunkhash].js') : '[id].js'
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isProd
-        ? '"production"'
-        : JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.NODE_ENV': isProd ?
+        '"production"' : JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"'
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function(module) {
+      minChunks: function (module) {
         // any required modules inside node_modules are extracted to vendor
         return (
           // it's inside node_modules
@@ -69,24 +65,27 @@ if (isProd) {
       minify: true,
       dontCacheBustUrlsMatching: /./,
       staticFileGlobsIgnorePatterns: [/index\.html$/, /\.map$/, /\.json$/],
-      /*runtimeCaching: [
-        {
+      runtimeCaching: [{
           urlPattern: '/',
           handler: 'networkFirst'
         },
         {
-          urlPattern: /\/(top|new|show|ask|jobs)/,
+          urlPattern: '/articles',
           handler: 'networkFirst'
         },
         {
-          urlPattern: '/item/:id',
+          urlPattern: '/articles/:id',
           handler: 'networkFirst'
         },
         {
-          urlPattern: '/user/:id',
+          urlPattern: '/project',
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: '/about',
           handler: 'networkFirst'
         }
-      ]*/
+      ]
     })
   )
   if (config.build.bundleAnalyzerReport) {

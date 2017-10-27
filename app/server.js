@@ -11,18 +11,20 @@ const bodyParser = require('koa-bodyparser')
 const router = require('koa-router')()
 const mongoose = require('mongoose')
 const cors = require('koa-cors')
-// mongodb连接
+  // mongodb连接
 const config = require('./config')
 mongoose.Promise = require('bluebird')
 mongoose.connect(config.dbUrl)
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connection open to: ${config.dbUrl}`)
 })
+
 // 引入相关模型
 require('./models/adminUser')
 require('./models/article')
 require('./models/comment')
 require('./models/project')
+
 // 引入路由
 const adminUserRouter = require('./router/adminUser')
 const articleRouter = require('./router/article')
@@ -31,6 +33,7 @@ const projects = require('./router/project')
 
 const fArticleRouter = require('./router/fArticle')
 const fProjectRouter = require('./router/fProject')
+
 // 环境区分
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -46,14 +49,16 @@ const titles = {
 const cacheUrls = ['/', '/articles']
 const isCacheable = ctx => cacheUrls.indexOf(ctx.url) >= 0 && useMicroCache
 const resolve = file => path.resolve(__dirname, file)
+
 // 创建 koa 实例
 const app = new Koa()
+
 // 全局中间件
 app.use(bodyParser())
 app.use(json())
 app.use(logger())
 app.use(cors({
-  'origin': 'http://localhost:3000',
+  'origin': 'http://localhost:3030',
   'credentials': true
 }))
 
@@ -66,7 +71,7 @@ const serve = (filepath, cache) => require('koa-static')(resolve(filepath), {
 const template = fs.readFileSync(resolve('../src/index.template.html'), 'utf-8')
 
 // 创建渲染
-function createRenderer (bundle, options) {
+function createRenderer(bundle, options) {
   return require('vue-server-renderer').createBundleRenderer(bundle, Object.assign(options, {
     template,
     cache: LRU({
@@ -102,7 +107,7 @@ function render(ctx, next) {
   console.log('url:', ctx.url)
   ctx.type = 'html'
   ctx.set('X-Powered-By', 'Koa Vue SSR')
-  // set ctx.body as stream
+    // set ctx.body as stream
   const PassThrough = require('stream').PassThrough
   ctx.body = new PassThrough()
   if (!renderer) {
@@ -156,29 +161,32 @@ function render(ctx, next) {
     url: ctx.url
   }
   renderer.renderToStream(context)
-          .on('error', handleError)
-          .on('end', handleStreamEnd)
-          .pipe(ctx.body)
+    .on('error', handleError)
+    .on('end', handleStreamEnd)
+    .pipe(ctx.body)
 }
 
 // 如果不是 api 的路由的直接跳 next
 router.get(/^(?!\/api)(?:\/|$)/, isProd ? render : (ctx, next) => {
   readyPromise.then(() => render(ctx, next))
 })
+
 // 后台登录认证
 // routes definition
 router.use('/api/backstage/user', adminUserRouter.routes())
 router.use('/api/backstage/article', articleRouter.routes())
 router.use('/api/backstage/upload', uploadFile.routes())
 router.use('/api/backstage/project', projects.routes())
+
 // 前端调试
 router.use('/api/front/article', fArticleRouter.routes())
 router.use('/api/front/project', fProjectRouter.routes())
+
 // 把路由绑定到 koa 中
 app.use(router.routes()).use(router.allowedMethods())
 
 const port = process.env.PORT || (
-    isProd ? 8902 : 3030)
+  isProd ? 8902 : 3030)
 app.listen(port, () => {
   console.log(`server started at http://127.0.0.1:${port}`)
 })

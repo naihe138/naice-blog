@@ -6,8 +6,9 @@
 const querystring = require('querystring')
 const Aticles = require('../models/article')
 const article = new Aticles()
+
 // 添加文章
-const add = async (ctx, next) => {
+const add = async(ctx, next) => {
   let opts = ctx.request.body
   if (!opts.title || !opts.editStr || !opts.contentStr || !opts.describe) {
     ctx.body = {
@@ -34,7 +35,7 @@ const add = async (ctx, next) => {
   }
 }
 
-const editArticle = async (ctx, next) =>{
+const editArticle = async(ctx, next) => {
   let opts = ctx.request.body
   if (!opts.title || !opts.editStr || !opts.contentStr || !opts.describe) {
     ctx.body = {
@@ -48,8 +49,8 @@ const editArticle = async (ctx, next) =>{
     opts.tags = opts.tags.split(',').map(v => v.trim()).filter(v => v)
   }
   let prams = {}
-  for(let key in opts){
-    if(key != 'id'){
+  for (let key in opts) {
+    if (key != 'id') {
       prams[key] = opts[key]
     }
   }
@@ -68,12 +69,12 @@ const editArticle = async (ctx, next) =>{
 }
 
 // 获取文章列表
-const getArticles = async (ctx, next) => {
+const getArticles = async(ctx, next) => {
   const opts = querystring.parse(ctx.request.url.split('?')[1])
   const page = opts.page || 0
   const limit = 10
   const skip = page * limit
-  const sort = { 'meta.createAt': -1 }
+  const sort = { 'meta.updateAt': -1 }
   const aticles = await article.query(skip, limit, sort)
   const count = await article.queryCount({})
   if (aticles && aticles.length > 0) {
@@ -89,10 +90,11 @@ const getArticles = async (ctx, next) => {
     }
   }
 }
+
 // 获取所有文章
-const getAllArticles = async (ctx, next) => {
+const getAllArticles = async(ctx, next) => {
   const opts = querystring.parse(ctx.request.url.split('?')[1])
-  const reg = new RegExp(opts.title,'g')
+  const reg = new RegExp(opts.title, 'g')
   const aticles = await article.queryAll()
   if (aticles && aticles.length > 0) {
     let ret = aticles.filter(item => {
@@ -111,8 +113,9 @@ const getAllArticles = async (ctx, next) => {
     }
   }
 }
+
 // 根据 tag 下面所有的文章
-const getTags = async (ctx, next) => {
+const getTags = async(ctx, next) => {
   let urlQuery = querystring.parse(ctx.request.url.split('?')[1])
   if (!urlQuery.tags) {
     ctx.body = {
@@ -144,7 +147,7 @@ const getTags = async (ctx, next) => {
 }
 
 // 获取指定文章
-const getOneArticle = async (ctx, next) => {
+const getOneArticle = async(ctx, next) => {
   const id = ctx.params.id
   const data = await article.queryOne({ _id: id })
   if (data) {
@@ -162,7 +165,7 @@ const getOneArticle = async (ctx, next) => {
 }
 
 // 获取指定文章
-const removeOneArticle = async (ctx, next) => {
+const removeOneArticle = async(ctx, next) => {
   const id = ctx.request.body.id
   const data = await article.remove({ _id: id })
   if (data) {

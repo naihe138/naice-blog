@@ -17,7 +17,7 @@ class Article {
     return this.model.findOne(opts).exec()
   }
   query(skip, limit, sort) {
-    const query = this.model.find({}).skip(skip).limit(limit).sort(sort)
+    const query = this.model.find({}, 'title _id tags describe meta').skip(skip).limit(limit).sort(sort)
     return query.exec()
   }
   queryCount(opts) {
@@ -27,7 +27,7 @@ class Article {
     return this.model.find({}).exec()
   }
   updated(id, opts) {
-    return this.model.update({ _id: id }, { $set: opts}).exec();
+    return this.model.update({ _id: id }, { $set: opts }).exec();
   }
   queryTag(tagOpts) {
     return this.model.find(tagOpts).exec()

@@ -131,16 +131,16 @@ export default {
       }
     },
     validate({ params }) {
-        return params.id
+      return params.id
     },
     mixins: [FooterMixin, TimeMixin],
     components: {
-        Shear,
-        Comment
+      Shear,
+      Comment
     },
     async asyncData ({ params }) {
-        const res = await getArticleId(params.id)
-        return {article: res.result}
+      const res = await getArticleId(params.id)
+      return {article: res.result}
     },
     data () {
       return {
@@ -154,7 +154,7 @@ export default {
     },
     methods: {
         showShear() {
-            this.isShowShear = !this.isShowShear
+          this.isShowShear = !this.isShowShear
         },
         codehl() {
           this.$nextTick(() => {
@@ -189,87 +189,87 @@ export default {
             let Browser = '';
             //IE
             if (agent.indexOf('msie') > 0) {
-                let regStr_ie = /msie [\d.]+;/gi
-                Browser = 'Ie'
+              let regStr_ie = /msie [\d.]+;/gi
+              Browser = 'Ie'
             }
             //firefox
             else if (agent.indexOf('firefox') > 0) {
-                let regStr_ff = /firefox\/[\d.]+/gi;
-                Browser = 'Firefox';
+              let regStr_ff = /firefox\/[\d.]+/gi;
+              Browser = 'Firefox';
             }
             //Chrome
             else if (agent.indexOf('chrome') > 0) {
-                let regStr_chrome = /chrome\/[\d.]+/gi;
-                Browser = "Chrome";
+              let regStr_chrome = /chrome\/[\d.]+/gi;
+              Browser = "Chrome";
             }
             // Safari
             else if (agent.indexOf('safari') > 0 && agent.indexOf('chrome') < 0) {
-                let regStr_saf = /version\/[\d.]+/gi;
-                Browser = 'Safari'
+              let regStr_saf = /version\/[\d.]+/gi;
+              Browser = 'Safari'
             } else {
-                Browser = 'Chrome'
+              Browser = 'Chrome'
             }
             return Browser;
         },
         currentSystem (str) {
-            const reg = /mac/ig
-            return reg.test(str) ? 'Mac' : 'Window'
+          const reg = /mac/ig
+          return reg.test(str) ? 'Mac' : 'Window'
         },
         getDateTimeStamp(dateStr){
-            return Date.parse(dateStr.replace(/-/gi,"/"));
+          return Date.parse(dateStr.replace(/-/gi,"/"));
         },
         getDateDiff(str){
-            let minute = 1000 * 60;
-            let hour = minute * 60;
-            let day = hour * 24;
-            let halfamonth = day * 15;
-            let month = day * 30;
-            let now = new Date().getTime();
-            let diffValue = now - (new Date(str).getTime());
-            if(diffValue < 0){return;}
-            let monthC =diffValue / month;
-            let weekC =diffValue / (7*day);
-            let dayC =diffValue / day;
-            let hourC =diffValue / hour;
-            let minC =diffValue / minute;
-            let result = '';
-            if(monthC>=1){
-                result=`${parseInt(monthC)}月前`;
-            }
-            else if(weekC>=1){
-                result=`${parseInt(weekC)}周前`;
-            }
-            else if(dayC>=1){
-                result=`${parseInt(dayC)}天前`;
-            }
-            else if(hourC>=1){
-                result=`${parseInt(hourC)}小时前`;
-            }
-            else if(minC>=1){
-                result=`${parseInt(minC)}分钟前`;
-            }else
-            result = '刚刚';
-            return result;
+          let minute = 1000 * 60;
+          let hour = minute * 60;
+          let day = hour * 24;
+          let halfamonth = day * 15;
+          let month = day * 30;
+          let now = new Date().getTime();
+          let diffValue = now - (new Date(str).getTime());
+          if(diffValue < 0){return;}
+          let monthC =diffValue / month;
+          let weekC =diffValue / (7*day);
+          let dayC =diffValue / day;
+          let hourC =diffValue / hour;
+          let minC =diffValue / minute;
+          let result = '';
+          if(monthC>=1){
+            result=`${parseInt(monthC)}月前`;
+          }
+          else if(weekC>=1){
+            result=`${parseInt(weekC)}周前`;
+          }
+          else if(dayC>=1){
+            result=`${parseInt(dayC)}天前`;
+          }
+          else if(hourC>=1){
+            result=`${parseInt(hourC)}小时前`;
+          }
+          else if(minC>=1){
+            result=`${parseInt(minC)}分钟前`;
+          }else
+          result = '刚刚';
+          return result;
         },
         async toShowReply(index, replyNum) {
-            const {_id} = this.comments[index]
-            console.log(replyNum)
-            if (!this.comments[index].isShow && replyNum > 0) {
-              const res = await getReply(_id)
-              this.comments[index].replyList = res.result.data
-            }
-            this.comments[index].isShow = !this.comments[index].isShow
+          const {_id} = this.comments[index]
+          console.log(replyNum)
+          if (!this.comments[index].isShow && replyNum > 0) {
+            const res = await getReply(_id)
+            this.comments[index].replyList = res.result.data
+          }
+          this.comments[index].isShow = !this.comments[index].isShow
         },
         async putComment(user) {
-            let params = {
-                post_id: this.$route.params.id,
-                ...user
-            }
-            const res = await addComment(params)
-            if (res.code === 1) {
-              this.getComment()
-              this.article.meta.comments += 1
-            }
+          let params = {
+            post_id: this.$route.params.id,
+            ...user
+          }
+          const res = await addComment(params)
+          if (res.code === 1) {
+            this.getComment()
+            this.article.meta.comments += 1
+          }
         },
         toConcleReply(index) {
           this.comments[index].at = {}

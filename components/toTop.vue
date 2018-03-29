@@ -15,7 +15,7 @@ export default {
 		}
 	},
 	computed: {
-		scrollTop () { 
+		scrollTop () {
 			return this.$store.state.scrollTop
 		}
 	},
@@ -33,7 +33,7 @@ export default {
 		},
 		mail() {
 			window.open('http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=CTo_OTs4PDs6OUl4eCdqZmQ', '_blank')
-			
+
 		}
 	},
 	watch: {

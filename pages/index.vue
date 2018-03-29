@@ -40,22 +40,22 @@
 </template>
 
 <script>
-export default {
-  head () {
-    return {
-      title: 'naice | 首页'
-    }
-  },
-  mounted() {
-    const userinfo = localStorage.getItem('userInfo')
-    if (!userinfo) {
-      this.$store.commit('changeAverter', Math.floor(Math.random() * 20))
-    } else {
-      let info = JSON.parse(userinfo)
-      this.$store.commit('changeAverter', info.gravatar)
-    }
-  }
-}
+	export default {
+		head () {
+			return {
+				title: 'naice | 首页'
+			}
+		},
+		mounted() {
+			const userinfo = localStorage.getItem('userInfo')
+			if (!userinfo) {
+				this.$store.commit('changeAverter', Math.floor(Math.random() * 20))
+			} else {
+				let info = JSON.parse(userinfo)
+				this.$store.commit('changeAverter', info.gravatar)
+			}
+		}
+	}
 </script>
 
 <style scoped>

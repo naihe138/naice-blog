@@ -22,8 +22,8 @@
                     <span v-if="isLoadingData">数据加载中...</span>
                 </div>
             </section>
-            <section class="side" id = "side">
-                <div class="hot">
+            <section class="side">
+                <div class="hot" id = "sideHot">
                     <div class="hot-title">热门文章</div>
                     <div class="hot-article">
                         <h3 v-for="(item, index) in hotArticle" :key="index" @click="goDetail(item._id, hotArticle)">
@@ -31,46 +31,28 @@
                         </h3>
                     </div>
                 </div>
-                <div class="tags" id = "tags">
-                    <div class="hot-title">标签</div>
-                    <div class="tag-list">
-                        <nuxt-link
-                            v-for="(item, index) in tags.result.list"
-                            :key="index"
-                            :to="`/article?tag=${item._id}`">{{item.name}}<span>({{item.count}})</span></nuxt-link>
-                    </div>
-                </div>
-                <div class="smallNav">
-                    <div class="flag"></div>
-                    <div>
-                        <nuxt-link to="/about">我</nuxt-link>
-                        <i>•</i>
-                        <nuxt-link to="/hero">留言墙</nuxt-link>
-                        <i>•</i>
-                        <nuxt-link to="/allarticle">归档</nuxt-link>
-                    </div>
-                </div>
-            </section>
-            <transition name="downup">
-                <section class="tagSide" v-show="showFixedTag">
-                    <div class="tags">
-                        <div class="hot-title">标签</div>
-                        <div class="tag-list">
-                            <nuxt-link v-for="(item, index) in tags.result.list" :key="index" to="/">{{item.name}}<span>({{item.count}})</span></nuxt-link>
-                        </div>
-                    </div>
-                    <div class="smallNav">
+                <div :class="showFixedTag ? 'fixedTag' : ''">
+                  <div class="tags" id = "tags">
+                      <div class="hot-title">标签</div>
+                      <div class="tag-list">
+                          <nuxt-link
+                              v-for="(item, index) in tags.result.list"
+                              :key="index"
+                              :to="`/article?tag=${item._id}`">{{item.name}}<span>({{item.count}})</span></nuxt-link>
+                      </div>
+                  </div>
+                  <div class="smallNav">
                       <div class="flag"></div>
                       <div>
-                        <nuxt-link to="/about">我</nuxt-link>
-                        <i>•</i>
-                        <nuxt-link to="/hero">留言墙</nuxt-link>
-                        <i>•</i>
-                        <nuxt-link to="/allarticle">归档</nuxt-link>
+                          <nuxt-link to="/about">我</nuxt-link>
+                          <i>•</i>
+                          <nuxt-link to="/hero">留言墙</nuxt-link>
+                          <i>•</i>
+                          <nuxt-link to="/allarticle">归档</nuxt-link>
                       </div>
-                    </div>
-                </section>
-            </transition>
+                  </div>
+                </div>
+            </section>
         </main>
         <to-top></to-top>
     </div>
@@ -83,110 +65,111 @@ import FooterMixin from '../../utils/footer-mixin'
 import TimeMixin from '../../utils/time-mixin'
 
 let page = 1
+let fetchTags = getTag()
+let fetchHotArticle = getArticle({hot: true})
+let fetchArticle = getArticle({current_page: page})
+
 export default {
-    head () {
-        return {
-            title: 'naice | 文章'
-        }
-    },
-    layout: 'layout',
-    mixins: [FooterMixin, TimeMixin],
-    components: {
-        ToTop
-    },
-    async asyncData ({ params }) {
-      console.log(params)
-      const tags = await getTag()
-      const articles = await getArticle({current_page: page})
-      const hotArticle = await getArticle({hot: true})
-      return {
-        tags,
-        article: articles.result.list,
-        hotArticle: hotArticle.result.list
-      }
-    },
-    data () {
-        return {
-          showFixedTag: false,
-          tagSide: null,
-          tagDom: null,
-          isLoadingData: false,
-          hasMore: true,
-          page: page
-        }
-    },
-    computed: {
-      scrollTop () {
-        return this.$store.state.scrollTop
-      },
-      // hotArticle () {
-      //   return this.$store.state.article.hotData
-      // }
-    },
-    methods: {
-      loadMore(opts = {}) {
-        this.isLoadingData = true
-        this.page += 1
-        let params = {current_page: this.page, ...opts}
-        getArticle(params).then(res => {
-          this.isLoadingData = false
-          const {result} = res
-          if (this.page >= result.pagination.total_page) {
-            this.hasMore = false
-          }
-          let arr = []
-          if (opts.tag || opts.keyword || opts.isNew) {
-            arr = result.list
-          } else {
-            arr = this.article.concat(result.list)
-          }
-          // this.$store.commit('getArticle', arr)
-          this.article = arr
-          this.$nextTick(() => {
-            this.footer()
-          })
-        }).catch(err => {
-          this.isLoadingData = false
-        })
-      },
-      goDetail(id, data) {
-        const arr = data.filter(item => item._id == id)
-        this.$store.commit('selectArticle', arr[0])
-        this.$router.push('/article/' + id)
-      }
-    },
-    mounted () {
-      this.$nextTick(() => {
-        this.tagSide = document.querySelector('#side')
-        this.tagDom = document.querySelector('#tags')
-        this.mailContentDom = document.querySelector('#mailContent')
-        this.windowHeight = document.documentElement.clientHeight
-        this.footer()
-        window.addEventListener('scroll', (e) => {
-          const top = $(document).scrollTop()
-          const mailContentDomHeight = this.mailContentDom.offsetHeight
-          this.showFixedTag = (top >= (this.tagSide.offsetHeight + this.tagDom.offsetHeight))
-          if ((this.windowHeight + top) > (mailContentDomHeight - 50) && !this.isLoadingData && this.hasMore) {
-            this.loadMore()
-          }
-        })
-      })
-    },
-    beforeRouteEnter (to, from, next) {
-      next(vm => {
-        if (to.query.tag || to.query.keyword) {
-          vm.loadMore(to.query)
-        }
-      })
-    },
-    beforeRouteUpdate (to, from, next) {
-      if (to.query.tag || to.query.keyword) {
-        this.page = 0
-        this.hasMore = true
-        this.loadMore(to.query)
-      }
-      next()
+  head () {
+    return {
+      title: 'naice | 文章'
     }
+  },
+  layout: 'layout',
+  mixins: [FooterMixin, TimeMixin],
+  components: {
+    ToTop
+  },
+  async asyncData ({ params }) {
+    console.log(params)
+    const tags = await fetchTags
+    const articles = await fetchArticle
+    const hotArticle = await fetchHotArticle
+    return {
+      tags,
+      article: articles.result.list,
+      hotArticle: hotArticle.result.list
+    }
+  },
+  data () {
+    return {
+      showFixedTag: false,
+      sideHot: null,
+      isLoadingData: false,
+      hasMore: true,
+      page: page
+    }
+  },
+  computed: {
+    scrollTop () {
+      return this.$store.state.scrollTop
+    }
+  },
+  methods: {
+    loadMore(opts = {}) {
+      this.isLoadingData = true
+      this.page += 1
+      let params = {current_page: this.page, ...opts}
+      getArticle(params).then(res => {
+        this.isLoadingData = false
+        const {result} = res
+        if (this.page >= result.pagination.total_page) {
+          this.hasMore = false
+        }
+        let arr = []
+        if (opts.tag || opts.keyword || opts.isNew) {
+          arr = result.list
+        } else {
+          arr = this.article.concat(result.list)
+        }
+        // this.$store.commit('getArticle', arr)
+        this.article = arr
+        this.$nextTick(() => {
+          this.footer()
+        })
+      }).catch(err => {
+        this.isLoadingData = false
+      })
+    },
+    goDetail(id, data) {
+      const arr = data.filter(item => item._id == id)
+      this.$store.commit('selectArticle', arr[0])
+      this.$router.push('/article/' + id)
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.sideHot = document.querySelector('#sideHot')
+      this.mailContentDom = document.querySelector('#mailContent')
+      this.windowHeight = document.documentElement.clientHeight
+      this.footer()
+      window.addEventListener('scroll', (e) => {
+        const top = $(document).scrollTop()
+        const mailContentDomHeight = this.mailContentDom.offsetHeight
+        this.showFixedTag = (top >= (this.sideHot.offsetHeight + 80))
+        if ((this.windowHeight + top) > (mailContentDomHeight - 50) && !this.isLoadingData && this.hasMore) {
+          this.loadMore()
+        }
+      })
+    })
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (to.query.tag || to.query.keyword) {
+        vm.loadMore(to.query)
+      }
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.page = 0
+    this.hasMore = true
+    if (to.query.tag || to.query.keyword) {
+      this.loadMore(to.query)
+    } else {
+      this.loadMore({isNew: true})
+    }
+    next()
+  }
 }
 </script>
 
@@ -318,13 +301,6 @@ export default {
         cursor: pointer;
         color: #cccccc
     }
-    .downup-enter-active, .downup-leave-active {
-        transition: .1s;
-    }
-    .downup-enter, .downup-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        transform: translate3d(0, -50px, 0);
-        opacity: 0;
-    }
     .smallNav{
         margin-top: 20px;
         width: 100%;
@@ -340,5 +316,10 @@ export default {
     .smallNav a{
         padding: 0 5px;
         color: #797979;
+    }
+    .fixedTag{
+      position: fixed;
+      width: 250px;
+      top: 60px;
     }
 </style>

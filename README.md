@@ -6,6 +6,7 @@
 
 博客后台：[node-koa](https://github.com/naihe138/naice-blog-koa)
 
+
 ### 相关截图:
 
 
@@ -71,5 +72,41 @@
 + 页面数据可视化统计
 + react-native
 + ....
+
+
+### 启动
+
+
+#### clone
+````
+git clone git@github.com:naihe138/naice-blog.git
+
+````
+
+#### install
+````
+yarn
+
+````
+
+#### dev
+
+````
+
+npm run dev
+
+````
+
+#### build
+
+````
+npm run build
+````
+
+#### view build
+
+````
+npm start
+````
 
 如在浏览中遇到任何的bug，请留言我，我会第一时间修复，就此先谢谢

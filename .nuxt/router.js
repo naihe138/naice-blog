@@ -3,13 +3,13 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _d958fda6 = () => import('../pages/project.vue' /* webpackChunkName: "pages/project" */).then(m => m.default || m)
-const _72909f16 = () => import('../pages/hero.vue' /* webpackChunkName: "pages/hero" */).then(m => m.default || m)
-const _0944cea1 = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
-const _078f72d1 = () => import('../pages/allarticle.vue' /* webpackChunkName: "pages/allarticle" */).then(m => m.default || m)
-const _7d0578e6 = () => import('../pages/article/index.vue' /* webpackChunkName: "pages/article/index" */).then(m => m.default || m)
-const _7ab0c535 = () => import('../pages/article/_id.vue' /* webpackChunkName: "pages/article/_id" */).then(m => m.default || m)
-const _28fca966 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _7188ca10 = () => import('../pages/project.vue' /* webpackChunkName: "pages/project" */).then(m => m.default || m)
+const _07ecd12b = () => import('../pages/hero.vue' /* webpackChunkName: "pages/hero" */).then(m => m.default || m)
+const _1f6edf2c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
+const _76610126 = () => import('../pages/allarticle.vue' /* webpackChunkName: "pages/allarticle" */).then(m => m.default || m)
+const _5480cdd0 = () => import('../pages/article/index.vue' /* webpackChunkName: "pages/article/index" */).then(m => m.default || m)
+const _33ddfd00 = () => import('../pages/article/_id.vue' /* webpackChunkName: "pages/article/_id" */).then(m => m.default || m)
+const _3f26b9f1 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -71,37 +71,37 @@ export function createRouter () {
     routes: [
 		{
 			path: "/project",
-			component: _d958fda6,
+			component: _7188ca10,
 			name: "project"
 		},
 		{
 			path: "/hero",
-			component: _72909f16,
+			component: _07ecd12b,
 			name: "hero"
 		},
 		{
 			path: "/about",
-			component: _0944cea1,
+			component: _1f6edf2c,
 			name: "about"
 		},
 		{
 			path: "/allarticle",
-			component: _078f72d1,
+			component: _76610126,
 			name: "allarticle"
 		},
 		{
 			path: "/article",
-			component: _7d0578e6,
+			component: _5480cdd0,
 			name: "article"
 		},
 		{
 			path: "/article/:id",
-			component: _7ab0c535,
+			component: _33ddfd00,
 			name: "article-id"
 		},
 		{
 			path: "/",
-			component: _28fca966,
+			component: _3f26b9f1,
 			name: "index"
 		}
     ],

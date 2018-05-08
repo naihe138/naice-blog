@@ -113,7 +113,7 @@ export async function setContext(app, context) {
         return process.client
       },
       isStatic: process.static,
-      isDev: false,
+      isDev: true,
       isHMR: false,
       app,
       store: app.store,

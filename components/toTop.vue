@@ -21,19 +21,15 @@ export default {
 	},
 	methods: {
 		scroll(dir) {
-			if (!this.scrollDom) {
-				this.scrollDom = $('#layoutBox')
-			}
 			if (dir === 1) {
-				this.scrollNum += 200
+				this.scrollNum += 400
 			} else {
 				this.scrollNum = 0
 			}
-			this.scrollDom.animate({scrollTop:`${this.scrollNum}px`}, 300);
+			$("html,body").animate({scrollTop:`${this.scrollNum}px`}, 300);
 		},
 		mail() {
 			window.open('http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=CTo_OTs4PDs6OUl4eCdqZmQ', '_blank')
-
 		}
 	},
 	watch: {

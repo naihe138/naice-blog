@@ -76,6 +76,7 @@
 
 ### 启动
 
+>启动前一定要先启(动服务器)[https://github.com/naihe138/naice-blog-koa]，不然那请求不到数据
 
 #### clone
 ````

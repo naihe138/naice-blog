@@ -20,8 +20,6 @@
 
 ![音乐](http://img.store.naice.me/upqtsjle8.png)
 
-![项目](https://user-gold-cdn.xitu.io/2018/4/1/1627f9eaa9113bbc?w=1440&h=877&f=png&s=232679)
-
 ![留言](https://user-gold-cdn.xitu.io/2018/4/1/1627f9f2b869f78d?w=1440&h=877&f=png&s=175663)
 
 ![归档](https://user-gold-cdn.xitu.io/2018/4/1/1627fa33c4308b1d?w=1440&h=877&f=png&s=285072)

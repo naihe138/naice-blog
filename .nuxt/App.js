@@ -5,19 +5,14 @@ import '../assets/css/init.css'
 
 import '../assets/css/codeStyle.css'
 
+import _7c6a36a0 from '../layouts/layout.vue'
+import _6f6c098b from './layouts/default.vue'
 
-let layouts = {
-
-  "_layout": () => import('../layouts/layout.vue'  /* webpackChunkName: "layouts/layout" */).then(m => m.default || m),
-
-  "_default": () => import('./layouts/default.vue'  /* webpackChunkName: "layouts/default" */).then(m => m.default || m)
-
-}
-
-let resolvedLayouts = {}
+const layouts = { "_layout": _7c6a36a0,"_default": _6f6c098b }
 
 export default {
   head: {"title":"Naice","meta":[{"charset":"utf-8"},{"http-equiv":"cleartype","content":"on"},{"http-equiv":"Cache-Control"},{"name":"viewport","content":"width=device-width, initial-scale=1, user-scalable=no"},{"hid":"description","name":"description","content":"Naice, 前端, blog"},{"hid":"keywords","name":"keywords","content":"前端开发，JavaScript, Node, Vue，nuxt"},{"name":"author","content":"370215230@qq.com"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[{"src":"https:\u002F\u002Fcdn.bootcss.com\u002Fjquery\u002F3.3.1\u002Fjquery.min.js"},{"src":"https:\u002F\u002Fcdn.bootcss.com\u002Fhighlight.js\u002F9.12.0\u002Fhighlight.min.js"}],"style":[]},
+
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })
     const layoutEl = h(this.layout || 'nuxt')
@@ -35,7 +30,7 @@ export default {
       }
     }, [ templateEl ])
 
-    return h('div',{
+    return h('div', {
       domProps: {
         id: '__nuxt'
       }
@@ -48,10 +43,10 @@ export default {
     layout: null,
     layoutName: ''
   }),
-  beforeCreate () {
+  beforeCreate() {
     Vue.util.defineReactive(this, 'nuxt', this.$options.nuxt)
   },
-  created () {
+  created() {
     // Add this.$nuxt in child instances
     Vue.prototype.$nuxt = this
     // add to window so we can listen when ready
@@ -61,51 +56,40 @@ export default {
     // Add $nuxt.error()
     this.error = this.nuxt.error
   },
-  
-  mounted () {
+
+  mounted() {
     this.$loading = this.$refs.loading
   },
   watch: {
     'nuxt.err': 'errorChanged'
   },
-  
+
   methods: {
-    
-    errorChanged () {
+    errorChanged() {
       if (this.nuxt.err && this.$loading) {
         if (this.$loading.fail) this.$loading.fail()
         if (this.$loading.finish) this.$loading.finish()
       }
     },
-    
-    setLayout (layout) {
-      if (!layout || !resolvedLayouts['_' + layout]) layout = 'default'
+
+    setLayout(layout) {
+      if(layout && typeof layout !== 'string') throw new Error('[nuxt] Avoid using non-string value as layout property.')
+
+      if (!layout || !layouts['_' + layout]) {
+        layout = 'default'
+      }
       this.layoutName = layout
-      let _layout = '_' + layout
-      this.layout = resolvedLayouts[_layout]
+      this.layout = layouts['_' + layout]
       return this.layout
     },
-    loadLayout (layout) {
-      if (!layout || !(layouts['_' + layout] || resolvedLayouts['_' + layout])) layout = 'default'
-      let _layout = '_' + layout
-      if (resolvedLayouts[_layout]) {
-        return Promise.resolve(resolvedLayouts[_layout])
+    loadLayout(layout) {
+      if (!layout || !layouts['_' + layout]) {
+        layout = 'default'
       }
-      return layouts[_layout]()
-      .then((Component) => {
-        resolvedLayouts[_layout] = Component
-        delete layouts[_layout]
-        return resolvedLayouts[_layout]
-      })
-      .catch((e) => {
-        if (this.$nuxt) {
-          return this.$nuxt.error({ statusCode: 500, message: e.message })
-        }
-      })
+      return Promise.resolve(layouts['_' + layout])
     }
   },
   components: {
     NuxtLoading
   }
 }
-

@@ -386,7 +386,13 @@ export default {
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-    margin: 12px 0;
+    margin: 20px 0;
+    padding-top: 24px;
+    border-top: 1px dotted #d5d5d5;
+}
+
+.markdown .title h1{
+    border-top: 0;
 }
 
 .markdown h1{
@@ -398,8 +404,16 @@ export default {
     color: #333333;
 }
 
+.markdown h2 {
+    font-size: 24px;
+}
+
 .markdown h3{
     font-size: 20px;
+}
+
+.markdown h4{
+    font-size: 18px;
 }
 
 .markdown a {

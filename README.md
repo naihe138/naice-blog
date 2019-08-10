@@ -16,33 +16,16 @@
 
 ![文章详情](https://user-gold-cdn.xitu.io/2018/4/1/1627fa172d40b56e?w=1500&h=1055&f=png&s=644818)
 
-
 ![评论](https://user-gold-cdn.xitu.io/2018/4/1/1627fa1d85695f5d?w=1500&h=1055&f=png&s=299251)
 
-![项目](https://user-gold-cdn.xitu.io/2018/4/1/1627f9eaa9113bbc?w=1440&h=877&f=png&s=232679)
+![音乐](http://img.store.naice.me/upqtsjle8.png)
 
 ![留言](https://user-gold-cdn.xitu.io/2018/4/1/1627f9f2b869f78d?w=1440&h=877&f=png&s=175663)
 
-
 ![归档](https://user-gold-cdn.xitu.io/2018/4/1/1627fa33c4308b1d?w=1440&h=877&f=png&s=285072)
-
 
 ![关于](https://user-gold-cdn.xitu.io/2018/4/1/1627fa36c72e2f13?w=1440&h=877&f=png&s=345397)
 
-
-### 后台相关截图：
-
-
-![登录](https://user-gold-cdn.xitu.io/2018/4/1/1627fa3f064f0ee8?w=1440&h=877&f=png&s=329202)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa43c165b475?w=1440&h=877&f=png&s=208579)
-
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa5294b9a912?w=1440&h=877&f=png&s=120206)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa4ae6d40b0e?w=1440&h=877&f=png&s=156066)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa4d5d8e492e?w=1440&h=877&f=png&s=119976)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa4fa0e57b2a?w=1440&h=877&f=png&s=113900)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa591ac6e1d8?w=1440&h=877&f=png&s=108352)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa6d0b7668d4?w=1440&h=877&f=png&s=231570)
-![](https://user-gold-cdn.xitu.io/2018/4/1/1627fa676b537062?w=1440&h=877&f=png&s=118632)
 
 ### 相关技术栈：
 
@@ -67,7 +50,7 @@
 
 ### 未来可能加入
 
-+ 网易云音乐
++ ~~音乐可视化~~
 + 移动适配
 + 页面数据可视化统计
 + react-native
@@ -76,7 +59,7 @@
 
 ### 启动
 
->启动前一定要先启[动服务器](https://github.com/naihe138/naice-blog-koa)，不然那请求不到数据
+>启动前一定要先启动[服务器](https://github.com/naihe138/naice-blog-koa)，不然那请求不到数据
 
 #### clone
 ````

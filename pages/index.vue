@@ -26,14 +26,25 @@
 		<div class="home-view">
 			<section class="aboutMe">
 				<div class="about-nav">
-					<nuxt-link to="/">首页</nuxt-link>
-					<nuxt-link to="/article">文章</nuxt-link>
+					<nuxt-link to="/article">
+						<span class="lt1">文章</span>
+						<span class="lt2">Article</span>
+					</nuxt-link>
+					<nuxt-link to="/music">
+						<span class="lt1">音乐</span>
+						<span class="lt2">Music</span>
+					</nuxt-link>
 				</div>
 				<div class="about-nav">
-					<nuxt-link to="/about">关于</nuxt-link>
-					<nuxt-link to="/project">项目</nuxt-link>
+					<nuxt-link to="/project">
+						<span class="lt1">项目</span>
+						<span class="lt2">Project</span>
+					</nuxt-link>
+					<nuxt-link to="/about">
+						<span class="lt1">关于</span>
+						<span class="lt2">About</span>
+					</nuxt-link>
 				</div>
-				<div class="about-nav"></div>
 			</section>
 		</div>
 	</div>
@@ -94,7 +105,7 @@
 	}
 
 	.aboutMe {
-		width: 280px;
+		width: 260px;
 		/*border: 1px solid red;*/
 		height: 300px;
 	}
@@ -116,10 +127,19 @@
 		text-decoration: none;
 		transition: background 0.3s;
 	}
+	.about-nav a .lt2 {
+		display: none;
+	}
 	.about-nav a:hover{
 		background: #3fb76c;
 		color: #fff;
 		border-color: #3fb76c;
+	}
+	.about-nav a:hover .lt2{
+		display: inline;
+	}
+	.about-nav a:hover .lt1{
+		display: none;
 	}
   .aside-box {
 		/*width: 100%;*/
@@ -153,10 +173,12 @@
 		height: 100px;
 		border-radius: 50%;
 		transition: transform 0.5s;
+		cursor: pointer;
 	}
 
 	.aside-content img:hover {
 		transform: rotate(360deg);
+		box-shadow: 0 0 30px rgba(0, 255, 249, 0.57);
 	}
 
 	.aside-content h1 {

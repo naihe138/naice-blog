@@ -97,7 +97,7 @@ export default {
 			}
 		}
 	},
-	created () {
+	mounted () {
 		if (this.hero.length === 0) {
 			this.getHeroData()
 		}

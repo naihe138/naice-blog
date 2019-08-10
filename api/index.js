@@ -1,8 +1,8 @@
 
 import axios from '../config/axios'
 
-
-const baseUrl = process.env.NODE_ENV === 'production' ? 'https://blogapi.naice.me/api/' : 'http://127.0.0.1:3009/api/'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'production api' : 'http://127.0.0.1:3009/api/'
+// const baseUrl = 'http://127.0.0.1:3009/api/'
 
 export const getArticle = (params = {}) => axios.get(`${baseUrl}article/get`, {params})
 
@@ -35,3 +35,5 @@ export const addCommentLike = () => axios.put(`${baseUrl}hero/add`, {...params})
 export const replyCommentLike = () => axios.put(`${baseUrl}hero/add`, {...params})
 
 export const getProject = (params) => axios.get(`${baseUrl}project/get`, {params})
+
+export const getMusic = (params) => axios.get(`${baseUrl}music/get`, {params})

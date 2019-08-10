@@ -81,7 +81,6 @@ export default {
     ToTop
   },
   async asyncData ({ params }) {
-    console.log(params)
     const tags = await fetchTags
     const articles = await fetchArticle
     const hotArticle = await fetchHotArticle

@@ -4,7 +4,7 @@
 			<div class="info">
 				<p>
 					<i class="iconfont icon">&#xe670;</i>
-					<span>我是Naice, 一个91年出生的前端开发者</span>
+					<span>我是Naice, 一个前端开发程序员</span>
 				</p>
 				<p>
 					<i class="iconfont icon">&#xe65b;</i>

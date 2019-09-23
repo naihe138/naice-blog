@@ -3,6 +3,8 @@ import NuxtLoading from './components/nuxt-loading.vue'
 
 import '../assets/css/init.css'
 
+import '../assets/css/codeStyle.css'
+
 import _7c6a36a0 from '../layouts/layout.vue'
 import _40930270 from '../layouts/music-layout.vue'
 import _6f6c098b from './layouts/default.vue'
@@ -103,6 +105,8 @@ export default {
     },
 
     setLayout(layout) {
+      if(layout && typeof layout !== 'string') throw new Error('[nuxt] Avoid using non-string value as layout property.')
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

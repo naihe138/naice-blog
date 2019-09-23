@@ -81,6 +81,8 @@ export default async (ssrContext) => {
     return renderErrorPage()
   }
 
+  const s = Date.now()
+
   // Components are already resolved by setContext -> getRouteData (app/utils.js)
   const Components = getMatchedComponents(router.match(ssrContext.url))
 
@@ -210,6 +212,8 @@ export default async (ssrContext) => {
 
     return Promise.all(promises)
   }))
+
+  if (asyncDatas.length) debug('Data fetching ' + ssrContext.url + ': ' + (Date.now() - s) + 'ms')
 
   // datas are the first row of each
   ssrContext.nuxt.data = asyncDatas.map(r => r[0] || {})

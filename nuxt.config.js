@@ -23,7 +23,7 @@ module.exports = {
   },
   css: [
     '~assets/css/init.css',
-    '~assets/css/codeStyle.css'
+    // '~assets/css/codeStyle.css'
   ],
   /*
   ** Customize the progress bar color
@@ -45,7 +45,8 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    extractCSS: true
   },
   cache: true
 }

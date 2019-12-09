@@ -61,33 +61,31 @@
 
 >启动前一定要先启动[服务器](https://github.com/naihe138/naice-blog-koa)，不然那请求不到数据
 
-#### clone
+#### Clone
 ````
 git clone git@github.com:naihe138/naice-blog.git
 
 ````
 
-#### install
+#### Install
 ````
 npm install
 
 ````
 
-#### dev
+#### Dev
 
 ````
-
 npm run dev
-
 ````
 
-#### build
+#### Build
 
 ````
 npm run build
 ````
 
-#### view build
+#### View build
 
 ````
 npm start

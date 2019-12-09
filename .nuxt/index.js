@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Meta from 'vue-meta'
+import ClientOnly from 'vue-client-only'
+import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
-import NoSSR from './components/no-ssr.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtLink from './components/nuxt-link.js'
 import NuxtError from './components/nuxt-error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
@@ -12,16 +12,27 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-// Component: <no-ssr>
-Vue.component(NoSSR.name, NoSSR)
+// Component: <ClientOnly>
+Vue.component(ClientOnly.name, ClientOnly)
+// TODO: Remove in Nuxt 3: <NoSsr>
+Vue.component(NoSsr.name, {
+  ...NoSsr,
+  render(h, ctx) {
+    if (process.client && !NoSsr._warned) {
+      NoSsr._warned = true
+      console.warn(`<no-ssr> has been deprecated and will be removed in Nuxt 3, please use <client-only> instead`)
+    }
+    return NoSsr.render(h, ctx)
+  }
+})
 
-// Component: <nuxt-child>
+// Component: <NuxtChild>
 Vue.component(NuxtChild.name, NuxtChild)
+Vue.component('NChild', NuxtChild)
 
-// Component: <nuxt-link>
-Vue.component(NuxtLink.name, NuxtLink)
+// Component NuxtLink is imported in server.js or client.js
 
-// Component: <nuxt>`
+// Component: <Nuxt>`
 Vue.component(Nuxt.name, Nuxt)
 
 // vue-meta configuration
@@ -76,7 +87,7 @@ async function createApp(ssrContext) {
       dateErr: null,
       error(err) {
         err = err || null
-        app.context._errored = !!err
+        app.context._errored = Boolean(err)
         err = err ? normalizeError(err) : null
         const nuxt = this.nuxt || this.$options.nuxt
         nuxt.dateErr = Date.now()
@@ -111,7 +122,8 @@ async function createApp(ssrContext) {
     payload: ssrContext ? ssrContext.payload : undefined,
     req: ssrContext ? ssrContext.req : undefined,
     res: ssrContext ? ssrContext.res : undefined,
-    beforeRenderFns: ssrContext ? ssrContext.beforeRenderFns : undefined
+    beforeRenderFns: ssrContext ? ssrContext.beforeRenderFns : undefined,
+    ssrContext
   })
 
   if (process.client) {

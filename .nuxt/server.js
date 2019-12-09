@@ -1,14 +1,16 @@
 import { stringify } from 'querystring'
 import Vue from 'vue'
-import omit from 'lodash/omit'
-import middleware from './middleware'
-import { applyAsyncData, sanitizeComponent, getMatchedComponents, getContext, middlewareSeries, promisify, urlJoin } from './utils'
-import { createApp, NuxtError } from './index'
+import fetch from 'node-fetch'
+import middleware from './middleware.js'
+import { applyAsyncData, getMatchedComponents, middlewareSeries, promisify, urlJoin, sanitizeComponent } from './utils.js'
+import { createApp, NuxtError } from './index.js'
+import NuxtLink from './components/nuxt-link.server.js' // should be included after ./index.js
 
-const debug = require('debug')('nuxt:render')
-debug.color = 4 // force blue color
+// Component: <NuxtLink>
+Vue.component(NuxtLink.name, NuxtLink)
+Vue.component('NLink', NuxtLink)
 
-const isDev = true
+if (!global.fetch) { global.fetch = fetch }
 
 const noopApp = () => new Vue({ render: h => h('div') })
 
@@ -61,9 +63,10 @@ export default async (ssrContext) => {
   const beforeRender = async () => {
     // Call beforeNuxtRender() methods
     await Promise.all(ssrContext.beforeRenderFns.map(fn => promisify(fn, { Components, nuxtState: ssrContext.nuxt })))
-
-    // Add the state from the vuex store
-    ssrContext.nuxt.state = store.state
+    ssrContext.rendered = () => {
+      // Add the state from the vuex store
+      ssrContext.nuxt.state = store.state
+    }
   }
   const renderErrorPage = async () => {
     // Load layout for error page
@@ -79,7 +82,7 @@ export default async (ssrContext) => {
     return renderErrorPage()
   }
 
-  const s = isDev && Date.now()
+  const s = Date.now()
 
   // Components are already resolved by setContext -> getRouteData (app/utils.js)
   const Components = getMatchedComponents(router.match(ssrContext.url))
@@ -91,7 +94,7 @@ export default async (ssrContext) => {
     try {
       await store.dispatch('nuxtServerInit', app.context)
     } catch (err) {
-      debug('error occurred when calling nuxtServerInit: ', err.message)
+      console.debug('Error occurred when calling nuxtServerInit: ', err.message)
       throw err
     }
   }
@@ -129,7 +132,8 @@ export default async (ssrContext) => {
   ** Call middleware (layout + pages)
   */
   midd = []
-  if (layout.middleware) midd = midd.concat(layout.middleware)
+  layout = sanitizeComponent(layout)
+  if (layout.options.middleware) midd = midd.concat(layout.options.middleware)
   Components.forEach((Component) => {
     if (Component.options.middleware) {
       midd = midd.concat(Component.options.middleware)
@@ -210,7 +214,7 @@ export default async (ssrContext) => {
     return Promise.all(promises)
   }))
 
-  if (asyncDatas.length) debug('Data fetching ' + ssrContext.url + ': ' + (Date.now() - s) + 'ms')
+  if (process.env.DEBUG && asyncDatas.length)console.debug('Data fetching ' + ssrContext.url + ': ' + (Date.now() - s) + 'ms')
 
   // datas are the first row of each
   ssrContext.nuxt.data = asyncDatas.map(r => r[0] || {})

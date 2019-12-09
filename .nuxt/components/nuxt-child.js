@@ -1,13 +1,17 @@
 
 export default {
-  name: 'nuxt-child',
+  name: 'NuxtChild',
   functional: true,
   props: {
     nuxtChildKey: {
       type: String,
       default: ''
     },
-    keepAlive: Boolean
+    keepAlive: Boolean,
+    keepAliveProps: {
+      type: Object,
+      default: undefined
+    }
   },
   render(h, { parent, data, props }) {
     data.nuxtChild = true
@@ -44,21 +48,38 @@ export default {
       window.$nuxt.$nextTick(() => {
         window.$nuxt.$emit('triggerScroll')
       })
-      if (beforeEnter) return beforeEnter.call(_parent, el)
+      if (beforeEnter) {
+        return beforeEnter.call(_parent, el)
+      }
     }
 
-    let routerView = [
-      h('router-view', data)
-    ]
-    if (props.keepAlive) {
-      routerView = [
-        h('keep-alive', { props: props.keepAliveProps }, routerView)
-      ]
+    // make sure that leave is called asynchronous (fix #5703)
+    if (transition.css === false) {
+      const leave = listeners.leave
+
+      // only add leave listener when user didnt provide one
+      // or when it misses the done argument
+      if (!leave || leave.length < 2) {
+        listeners.leave = (el, done) => {
+          if (leave) {
+            leave.call(_parent, el)
+          }
+
+          _parent.$nextTick(done)
+        }
+      }
     }
+
+    let routerView = h('routerView', data)
+
+    if (props.keepAlive) {
+      routerView = h('keep-alive', { props: props.keepAliveProps }, [routerView])
+    }
+
     return h('transition', {
       props: transitionProps,
       on: listeners
-    }, routerView)
+    }, [routerView])
   }
 }
 

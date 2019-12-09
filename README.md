@@ -69,7 +69,7 @@ git clone git@github.com:naihe138/naice-blog.git
 
 #### install
 ````
-yarn
+npm install
 
 ````
 

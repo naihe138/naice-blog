@@ -1,7 +1,4 @@
 module.exports = {
-  /*
-  ** Headers of the page
-  */
   head: {
     title: 'Naice',
     meta: [
@@ -17,13 +14,13 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js' },
-      { src: 'https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js' }
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js' }
     ]
   },
   css: [
     '~assets/css/init.css',
-    '~assets/css/codeStyle.css'
+    // '~assets/css/codeStyle.css'
   ],
   /*
   ** Customize the progress bar color
@@ -45,7 +42,8 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
-  },
-  cache: true
+    },
+    optimizeCSS: true,
+    extractCSS: true
+  }
 }

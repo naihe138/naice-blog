@@ -1,0 +1,409 @@
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("Source Sans Pro"), url("../fonts/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("Source Sans Pro Light");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("Source Sans Pro Semibold"), url("../fonts/SourceSansPro-Semibold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Roboto Mono";
+  src: local("Roboto Mono"), url("../fonts/RobotoMono-Regular.ttf");
+}
+@font-face {
+  font-family: "Dosis";
+  src: local("Dosis Medium"), url("../fonts/Dosis-Medium.ttf");
+  font-weight: 500;
+}
+
+pre {
+  border-radius: 2px;
+  position: relative;
+}
+pre code {
+  overflow-x: auto;
+  color: #525252;
+  white-space: pre;
+  padding: 1.2em 1.4em;
+  /* font-size: 1rem; */
+  font-size: 14px;
+  line-height: 1.6rem;
+  display: block;
+}
+pre code .hljs-tag,
+pre code .hljs-tag pre code .hljs-title,
+pre code .hljs-change,
+pre code .hljs-winutils,
+pre code .hljs-flow,
+pre code .hljs-tex pre code .hljs-special {
+  color: #2973b7;
+}
+pre code .hljs-symbol,
+pre code .hljs-symbol pre code .hljs-string,
+pre code .hljs-value,
+pre code .hljs-regexp,
+pre code .hljs-string,
+pre code .hljs-subst,
+pre code .hljs-haskell pre code .hljs-type,
+pre code .hljs-preprocessor,
+pre code .hljs-ruby pre code .hljs-class pre code .hljs-parent,
+pre code .hljs-built_in,
+pre code .hljs-sql pre code .hljs-aggregate,
+pre code .hljs-django pre code .hljs-template_tag,
+pre code .hljs-django pre code .hljs-variable,
+pre code .hljs-smalltalk pre code .hljs-class,
+pre code .hljs-javadoc,
+pre code .hljs-django pre code .hljs-filter pre code .hljs-argument,
+pre code .hljs-smalltalk pre code .hljs-localvars,
+pre code .hljs-smalltalk pre code .hljs-array,
+pre code .hljs-attr_selector,
+pre code .hljs-pseudo,
+pre code .hljs-addition,
+pre code .hljs-stream,
+pre code .hljs-envvar,
+pre code .hljs-apache pre code .hljs-tag,
+pre code .hljs-apache pre code .hljs-cbracket,
+pre code .hljs-tex pre code .hljs-command,
+pre code .hljs-prompt {
+  color: #42b983;
+}
+pre code .hljs-function pre code .hljs-keyword,
+pre code .hljs-constant {
+  color: #0092db;
+}
+pre code .hljs-keyword,
+pre code .hljs-attribute {
+  color: #d63200;
+}
+pre code .hljs-number,
+pre code .hljs-literal {
+  color: #a32eff;
+}
+pre code .hljs-class pre code .hljs-title {
+  color: #fff;
+}
+pre code .hljs-title {
+  /* color: #a6e22e; */
+  color: #1eaa71;
+}
+pre code .hljs-meta {
+  /* color: #a6e22e; */
+  color: #1e89aa;
+}
+
+pre code .hljs-tag pre code .hljs-value,
+pre code .hljs-comment,
+pre code .hljs-java pre code .hljs-annotation,
+pre code .hljs-python pre code .hljs-decorator,
+pre code .hljs-template_comment,
+pre code .hljs-pi,
+pre code .hljs-doctype,
+pre code .hljs-deletion,
+pre code .hljs-shebang,
+pre code .hljs-apache pre code .hljs-sqbracket,
+pre code .hljs-tex pre code .hljs-formula {
+  color: #707070;
+}
+pre code .hljs-coffeescript pre code .hljs-javascript,
+pre code .hljs-javascript pre code .hljs-xml,
+pre code .hljs-tex pre code .hljs-formula,
+pre code .hljs-xml pre code .hljs-javascript,
+pre code .hljs-xml pre code .hljs-vbscript,
+pre code .hljs-xml pre code .hljs-css,
+pre code .hljs-xml pre code .hljs-cdata {
+  opacity: 0.5;
+}
+pre code.hljs.lang-html::before,
+pre code.hljs.lang-js::before,
+pre code.hljs.lang-bash::before,
+pre code.hljs.lang-css::before {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ccc;
+  text-align: right;
+  font-size: 0.9em;
+  padding: 5px 10px 0;
+  line-height: 15px;
+  height: 15px;
+  font-weight: 600;
+}
+pre code.hljs.lang-html::before {
+  content: "HTML";
+}
+pre code.hljs.lang-js::before {
+  content: "JS";
+}
+pre code.hljs.lang-bash::before {
+  content: "Shell";
+}
+pre code.hljs.lang-css::before {
+  content: "CSS";
+}
+
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #304455;
+  background-color: #fff;
+  margin: 0;
+}
+body.docs {
+  padding-top: 61px;
+}
+
+a {
+  text-decoration: none;
+  color: #304455;
+}
+img {
+  border: none;
+}
+h1,
+h2,
+h3,
+h4,
+strong {
+  font-weight: 600;
+  color: #273849;
+}
+code, pre {
+  font-family: "Roboto Mono", Monaco, courier, monospace;
+  font-size: 0.85em;
+  background-color: #f8f8f8;
+  -webkit-font-smoothing: initial;
+  -moz-osx-font-smoothing: initial;
+  margin: 10px 0;
+}
+code {
+  color: #d63200;
+  padding: 3px 5px;
+  margin: 0 2px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+em {
+  color: #4f5959;
+}
+p {
+  word-spacing: 0.05em;
+}
+
+.benchmark-table {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.benchmark-table tbody > tr > th {
+  text-align: right;
+}
+.benchmark-table th,
+.benchmark-table td {
+  padding: 3px 7px;
+}
+
+.markdown {
+  position: relative;
+  /* padding: 2.2em 0; */
+  /* max-width: 700px; */
+  /* margin: 0 auto; */
+  /* padding-left: 50px; */
+
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 15px;
+  line-height: 32px;
+}
+
+.markdown a.button {
+  font-size: 0.9em;
+  color: #fff;
+  margin: 0.2em 0;
+  width: 200px;
+  text-align: center;
+  padding: 12px 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.markdown img {
+  max-width: 100%;
+}
+.markdown span.light {
+  color: #4f5959;
+}
+.markdown span.info {
+  font-size: 0.85em;
+  display: inline-block;
+  vertical-align: middle;
+  width: 280px;
+  margin-left: 20px;
+}
+.markdown h1 {
+  margin: 0 0 1em;
+}
+.markdown h2,
+.markdown h3 {
+  pointer-events: none;
+}
+.markdown h2 a,
+.markdown h3 a,
+.markdown h2 button,
+.markdown h3 button {
+  pointer-events: auto;
+  color: #273849;
+}
+.markdown h2:before,
+.markdown h3:before {
+  content: "";
+  display: block;
+  margin-top: -91px;
+  height: 91px;
+  visibility: hidden;
+}
+.markdown h2 {
+  margin: 45px 0 0.8em;
+  padding-bottom: 0.7em;
+  /* border-bottom: 1px solid #ddd; */
+}
+.markdown h3 {
+  margin: 52px 0 1.2em;
+  line-height: 1.2;
+  position: relative;
+}
+.markdown h3 > a:before {
+  content: "#";
+  color: #42b983;
+  position: absolute;
+  left: -0.7em;
+  margin-top: -0.05em;
+  padding-right: 0.5em;
+  font-size: 1.2em;
+  line-height: 1;
+  font-weight: bold;
+}
+.markdown figure {
+  margin: 1.2em 0;
+}
+.markdown p,
+.markdown ul,
+.markdown ol {
+  line-height: 2.2em;
+  margin: 1.2em 0 -1.2em;
+  padding-bottom: 1.2em;
+  position: relative;
+  z-index: 1;
+}
+.markdown ul,
+.markdown ol {
+  padding-left: 1.5em;
+  position: inherit;
+}
+.markdown ul ul,
+.markdown ol ul,
+.markdown ul ol,
+.markdown ol ol {
+  margin: 0;
+}
+.markdown a {
+  color: #42b983;
+  font-weight: 600;
+}
+.markdown blockquote {
+  margin: 2em 0;
+  padding-left: 20px;
+  border-left: 4px solid #42b983;
+}
+.markdown blockquote p {
+  font-weight: 600;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.markdown iframe {
+  margin: 1em 0;
+}
+.markdown > table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 1.2em auto;
+  padding: 0;
+  display: block;
+  overflow-x: auto;
+}
+.markdown > table td,
+.markdown > table th {
+  line-height: 1.5em;
+  padding: 0.4em 0.8em;
+  border: none;
+  border: 1px solid #ddd;
+}
+.markdown > table th {
+  font-weight: bold;
+  text-align: left;
+}
+.markdown > table th,
+.markdown > table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.markdown > table th code,
+.markdown > table tr:nth-child(2n) code {
+  background-color: #efefef;
+}
+.markdown p.tip,
+.markdown p.success {
+  padding: 12px 24px 12px 30px;
+  margin: 2em 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+  background-color: #f8f8f8;
+  position: relative;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+}
+.markdown p.tip:before,
+.markdown p.success:before {
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+}
+.markdown p.tip code,
+.markdown p.success code {
+  background-color: #efefef;
+}
+.markdown p.tip em,
+.markdown p.success em {
+  color: #304455;
+}
+.markdown p.tip {
+  border-left-color: #f66;
+}
+.markdown p.tip:before {
+  content: "!";
+  background-color: #f66;
+}
+.markdown p.success {
+  border-left-color: #42b983;
+}
+.markdown p.success:before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  background-color: #42b983;
+}

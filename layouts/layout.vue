@@ -300,8 +300,9 @@ export default {
 		bottom: 0;
 		width: 100%;
 		left: 0; */
-		overflow-x: hidden;
-		overflow-y: scroll;
+		/* overflow-x: hidden;
+		overflow-y: scroll; */
+		overflow: hidden;
 	}
 	.navUp {
 		transform: translate3d(0, -60px, 0)

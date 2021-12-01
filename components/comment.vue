@@ -61,6 +61,7 @@ export default {
 		}
 	},
 	data () {
+		this.avarterArr = avarterArr
 		return {
 			content: '',
 			isShowBtn: false,
@@ -75,8 +76,7 @@ export default {
 				url: /^((https|http):\/\/)+[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
 			},
 			showUserSet: true,
-			showReset: false,
-			avarterArr
+			showReset: false
 		}
 	},
 	computed: {

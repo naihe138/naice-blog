@@ -1,6 +1,6 @@
-# dependencies
 node_modules
-
-# logs
-npm-debug.log
-.DS_Store
+*.log
+.nuxt
+nuxt.d.ts
+.output
+.env

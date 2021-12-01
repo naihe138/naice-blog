@@ -41,7 +41,7 @@
 	</div>
 </template>
 <script>
-
+import { avarterLength } from '../utils/blowser'
 export default {
   	data () {
 		return {
@@ -274,7 +274,7 @@ export default {
 		this.chanrouter(this.$route)
 		const userinfo = localStorage.getItem('userInfo')
 		if (!userinfo) {
-			this.$store.commit('changeAverter', Math.floor(Math.random() * 20))
+			this.$store.commit('changeAverter', Math.floor(Math.random() * avarterLength))
 		} else {
 			let info = JSON.parse(userinfo)
 			this.$store.commit('changeAverter', info.gravatar)
@@ -300,8 +300,9 @@ export default {
 		bottom: 0;
 		width: 100%;
 		left: 0; */
-		overflow-x: hidden;
-		overflow-y: scroll;
+		/* overflow-x: hidden;
+		overflow-y: scroll; */
+		overflow: hidden;
 	}
 	.navUp {
 		transform: translate3d(0, -60px, 0)

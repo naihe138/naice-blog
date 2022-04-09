@@ -15,12 +15,9 @@ export const getBrowserVersion = (agent: string): string => {
 	return Browser;
 }
 
-export const currentSystem = (str): string => {
-	const reg = /mac/ig
-	return reg.test(str) ? 'Mac' : 'Window'
-}
+export const currentSystem = (value: string): string => (/mac/ig).test(value) ? 'Mac' : 'Window'
 
-export const avarterArr: string[] = [
+export const avatars: string[] = [
 	'avatar/1.jpg',
 	'avatar/2.jpg',
 	'avatar/3.jpg',
@@ -40,4 +37,4 @@ export const avarterArr: string[] = [
 	'avatar/20.jpeg'
 ]
 
-export const avarterLength = avarterArr.length
+export const avatarsLength = avatars.length

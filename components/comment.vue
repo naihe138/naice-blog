@@ -1,7 +1,7 @@
 <template>
 	<div class="arcComment" v-on:click.stop.prevent="() => {}">
 		<div v-if="!reply" class="averter">
-			<img :src="avarterArr[averterNum]" alt="">
+			<img :src="avarters[averterNum]" alt="">
 		</div>
 		<div class="inputBox" :style="isShowBtn ? {height: '180px'} : null">
 			<div class="user" v-if="showUserSet">
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import {avarterArr} from '../utils/blowser'
+import { avatars } from '../utils/browser'
 export default {
 	props: {
 		reply: {
@@ -61,7 +61,7 @@ export default {
 		}
 	},
 	data () {
-		this.avarterArr = avarterArr
+		this.avatars = avatars
 		return {
 			content: '',
 			isShowBtn: false,

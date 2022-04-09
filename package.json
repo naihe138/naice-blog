@@ -6,6 +6,11 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt3": "latest"
+    "nuxt3": "latest",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.6.0"
+  },
+  "dependencies": {
+    "clipboard": "^2.0.10"
   }
 }

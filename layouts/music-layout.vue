@@ -40,7 +40,7 @@
 	</div>
 </template>
 <script>
-import { avarterLength } from '../utils/blowser'
+import { avatarsLength } from '../utils/browser'
 export default {
   	data () {
 		return {

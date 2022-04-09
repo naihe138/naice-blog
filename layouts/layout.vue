@@ -41,7 +41,7 @@
 	</div>
 </template>
 <script>
-import { avarterLength } from '../utils/blowser'
+import { avatarsLength } from '../utils/browser'
 export default {
   	data () {
 		return {
@@ -274,7 +274,7 @@ export default {
 		this.chanrouter(this.$route)
 		const userinfo = localStorage.getItem('userInfo')
 		if (!userinfo) {
-			this.$store.commit('changeAverter', Math.floor(Math.random() * avarterLength))
+			this.$store.commit('changeAverter', Math.floor(Math.random() * avatarsLength))
 		} else {
 			let info = JSON.parse(userinfo)
 			this.$store.commit('changeAverter', info.gravatar)
